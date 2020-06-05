@@ -1,8 +1,8 @@
 CREATE DATABASE IF NOT EXISTS `presentationCalendar`;
 
-use `presentationCalendar`;
+USE `presentationCalendar`;
 
-create table presentations (
+CREATE TABLE IF NOT EXISTS presentations (
     id INT AUTO_INCREMENT PRIMARY KEY,
     presentation VARCHAR(64) NOT NULL,
     invitation VARCHAR(64) NOT NULL,
