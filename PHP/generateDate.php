@@ -10,8 +10,8 @@ function createPresentationSlots($duration, $start,$end)
             $start = $start_time;
             $end = date('Y-m-d H:i',strtotime('+'.$duration.' minutes',strtotime($start_time)));
             $start_time = date('Y-m-d H:i',strtotime('+'.$duration.' minutes',strtotime($start_time)));
-            echo $start;
-            insert($start);  
+            // echo $start;
+            insertDateSlots($start);  
         }    
   }
 createPresentationSlots(7, '2020-06-08 10:00AM', '2020-06-08 12:00PM');
