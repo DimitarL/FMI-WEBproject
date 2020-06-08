@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS presentations (
     username VARCHAR(64),
     presentation VARCHAR(64) NOT NULL,
     invitation VARCHAR(64) NOT NULL,
-    timeDate timestamp REFERENCES fkDate FOREIGN KEY DATES(timeDate),
-    constraint primary key(topic, username)
+    timeDate timestamp,
+    CONSTRAINT fkDate FOREIGN KEY (timeDate)
+    REFERENCES dates(timeDate),
+    PRIMARY KEY(topic, username)
 );

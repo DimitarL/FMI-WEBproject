@@ -4,5 +4,5 @@ USE `presentationCalendar`;
 
 CREATE TABLE IF NOT EXISTS dates(
     timeDate timestamp PRIMARY KEY,
-    hasPresentation boolean DEFAULT 'false'
+    hasPresentation boolean DEFAULT false
 )
