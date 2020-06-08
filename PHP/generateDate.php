@@ -16,7 +16,7 @@ function createPresentationSlots($duration, $start,$end)
   }
 createPresentationSlots(7, '2020-06-08 10:00AM', '2020-06-08 12:00PM');
 
-function insert($date){
+function insertDateSlots($date){
     $conn=openCon();
     $sql="INSERT INTO dates (timeDate) values (:datePlaceholder);";
     $stmt=$conn->prepare($sql);
