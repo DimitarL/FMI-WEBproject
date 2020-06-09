@@ -38,7 +38,6 @@ function addPresentation() {
     const invitationId = 'invitation';
 
     if (!validateField(topicId) || !validateField(presentationId) || !validateField(dateId)) {
-        console.log("HERE");
         document.getElementById(errorId).innerText = "Моля попълнете всички полета.";
     } else {
         document.getElementById(errorId).innerText = "";
@@ -63,7 +62,7 @@ function addPresentation() {
             let timeDate = document.getElementById(dateId).value;
 
             let data = { topic, username, presentation, invitation, timeDate };
-            console.log("DATA: " + data);
+            // console.log("DATA: " + data);
             insertPresentationData(data);
         } else {
             console.log("UPLOAD FILE IN: " + uploadFile);
@@ -100,7 +99,7 @@ function insertPresentationData(data) {
     const urlScript = "../php/insert_presentation.php";
     let callback = function(msg) {
         console.log("MSG: " + msg);
-        if (msg.localeCompare("1")) {
+        if (msg.toString().localeCompare("1")) {
             console.log("The presentation data is saved.");
             // window.location.href = "";
         } else {
