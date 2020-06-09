@@ -21,7 +21,6 @@ function addDateToSection(date) {
 
 document.getElementById('submitButton').addEventListener('click', () => {
     addPresentation();
-    // console.log("IN JS");
 })
 
 document.getElementById('cancelButton').addEventListener('click', () => {
@@ -54,7 +53,6 @@ function addPresentation() {
         formData.append('file', file);
 
         downloadImage(formData);
-
         if (uploadFile) {
             let topic = document.getElementById(topicId).value;
             let presentation = document.getElementById(presentationId).value;
@@ -62,14 +60,12 @@ function addPresentation() {
             let timeDate = document.getElementById(dateId).value;
 
             let data = { topic, username, presentation, invitation, timeDate };
-            // console.log("DATA: " + data);
             insertPresentationData(data);
         } else {
             console.log("UPLOAD FILE IN: " + uploadFile);
         }
     }
 
-    // let topic = document.getElementById('topic');
     return false;
 }
 
@@ -98,8 +94,7 @@ function validateField(fieldId) {
 function insertPresentationData(data) {
     const urlScript = "../php/insert_presentation.php";
     let callback = function(msg) {
-        console.log("MSG: " + msg);
-        if (msg.toString().localeCompare("1")) {
+        if (msg == "1") {
             console.log("The presentation data is saved.");
             // window.location.href = "";
         } else {
