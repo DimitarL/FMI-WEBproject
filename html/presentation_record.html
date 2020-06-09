@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Title </title>
+    <script defer type="module" src="../js/presentation_record.js"></script>
+    <!-- <script type="module" src="../js/ajax.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="../css/presentation_record.css">
+
+</head>
+
+<body>
+    <header class="header">
+        <h2> Календар за презентиране</h2>
+        <button onclick="">Изход</button>
+    </header>
+    <hr>
+    <main class="form-container">
+        <h3> Записване за презентиране</h3>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="field">
+                <label for="date">Дата:</label>
+                <select id="date" name="date">
+                </select>
+            </div>
+            <div class="field">
+                <label for="topic">Тема:</label>
+                <input type="text" name="topic" id="topic" placeholder="Въведете тема" required/>
+            </div>
+            <div class="field">
+                <label for="presentation">Презентация (линк):</label>
+                <input type="text" name="presentation" id="presentation" placeholder="Въведете линк" required/>
+            </div>
+            <div class="field">
+                <label for="invitation">Покана:</label>
+                <input type="file" name="invitation" id="invitation" accept=".jpg, .jpeg, .png, .gif" required/>
+            </div>
+
+            <div class="msg">
+                <p id="error"> </p>
+            </div>
+            <div class="field">
+                <input type="button" value="Отказ" id="cancelButton" />
+                <input type="button" value="Изпрати" id="submitButton" />
+            </div>
+        </form>
+    </main>
+</body>
+
+</html>
