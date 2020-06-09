@@ -1,5 +1,5 @@
 <?php
-Include 'dbOperations.php';
+Include 'db_connection.php';
 
 
 function createPresentationSlots($duration, $start,$end)
@@ -17,7 +17,7 @@ function createPresentationSlots($duration, $start,$end)
 createPresentationSlots(7, '2020-06-08 10:00AM', '2020-06-08 12:00PM');
 
 function insertDateSlots($date){
-    $conn=openCon();
+    $conn=dbConnection();
     $sql="INSERT INTO dates (timeDate) values (:datePlaceholder);";
     $stmt=$conn->prepare($sql);
     $stmt->bindParam(":datePlaceholder", $date);
