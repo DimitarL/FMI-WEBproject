@@ -94,7 +94,8 @@
         </tbody>
     </table>
     <div class="edit">
-        <input type="submit" value="Запиши се!" onclick="window.location='../html/presentation_record.html'">
+        <input type="submit" value="Запиши се" onclick="window.location='../html/presentation_record.html'">
+        <input type="submit" value="Към презентацията" onclick="window.location=''">
     </div>
     </main>
 </body>

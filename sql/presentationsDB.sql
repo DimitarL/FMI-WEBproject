@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS `presentationCalendar`;
+    CREATE DATABASE IF NOT EXISTS `presentationCalendar`;
 
-USE `presentationCalendar`;
+    USE `presentationCalendar`;  
 
 CREATE TABLE IF NOT EXISTS presentations (
     topic VARCHAR(128),
@@ -9,6 +9,6 @@ CREATE TABLE IF NOT EXISTS presentations (
     invitation VARCHAR(64) NOT NULL,
     timeDate timestamp,
     CONSTRAINT fkDate FOREIGN KEY (timeDate)
-    REFERENCES dates(timeDate),
+    REFERENCES dates(timeDate) ON UPDATE CASCADE,
     PRIMARY KEY(topic, username)
 );
