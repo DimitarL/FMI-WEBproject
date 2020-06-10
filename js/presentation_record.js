@@ -98,7 +98,7 @@ function insertPresentationData(data) {
             console.log("The presentation data is saved.");
             // window.location.href = "";
         } else {
-            document.getElementById(errorId).innerText = "Получи се грешка при обработката на заявката. Моля, опитайте пак по-късно.";
+            document.getElementById(errorId).innerText = msg;
         }
     }
     ajax_json(POST_METHOD, urlScript, { success: callback }, JSON.stringify(data));

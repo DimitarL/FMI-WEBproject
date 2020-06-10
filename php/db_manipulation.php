@@ -10,12 +10,12 @@ function getFreeDates(){
 
         $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
         
-        $preparedSql->execute() or die("Failed to execute sql query."); 
+        $preparedSql->execute() or die("Неуспешно се заредиха свободните дати."); 
         $connection = null;  
         return $preparedSql->fetchAll();
     }
     catch(PDOException $error) {
-        echo ("Request processing failed.");
+        echo ("Проблем със свързването с базата.Моля опитайте пак по-късно.");
     }
 }
 
@@ -26,19 +26,19 @@ function insertPresentation($username, $topic, $presentation, $invitation, $time
         $sql = "INSERT INTO presentations( topic, username, presentation, invitation, timeDate)
         VALUES (:topic, :username, :presentation, :invitation, :timeDate);";
 
-        $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
+        $preparedSql = $connection->prepare($sql) or die("Неуспешно свързване с базата.");
         $preparedSql->bindParam(':topic', $topic);
         $preparedSql->bindParam(':username', $username);
         $preparedSql->bindParam(':presentation', $presentation); 
         $preparedSql->bindParam(':invitation', $invitation);
         $preparedSql->bindParam(':timeDate', $timeDate);
-        $preparedSql->execute() or die("Failed to execute sql query."); 
+        $preparedSql->execute() or die("Вече сте записали тази тема."); 
         $connection = null;  
         changeDate($timeDate);
         return true;
     }
     catch(PDOException $error) {
-        echo ("Request processing failed.");
+        echo ("Проблем със свързването с базата.Моля опитайте пак по-късно.");
         return false;
     }
 }
@@ -49,13 +49,13 @@ function changeDate($timeDate){
         $connection = dbConnection();
         $sql = "UPDATE dates SET hasPresentation = true WHERE timeDate = :timeDate; ";
 
-        $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
+        $preparedSql = $connection->prepare($sql) or die("Неуспешно свързване с базата.");
         $preparedSql->bindParam(':timeDate', $timeDate);
-        $preparedSql->execute() or die("Failed to execute sql query."); 
+        $preparedSql->execute() or die("Часът беше неуспешно зает."); 
         $connection = null;  
    }
     catch(PDOException $error) {
-        echo ("Request processing failed.");
+        echo ("Проблем със свързването с базата.Моля опитайте пак по-късно..");
     }  
 }
 
