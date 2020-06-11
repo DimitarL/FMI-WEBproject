@@ -59,4 +59,37 @@ function changeDate($timeDate){
     }  
 }
 
+function getPresent(){
+    try {
+
+        $connection = dbConnection();
+        $sql = "SELECT * FROM present; ";
+
+        $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
+        $preparedSql->execute() or die("Failed to execute sql query."); 
+        $connection = null;  
+        return $preparedSql->fetchAll();
+   }
+    catch(PDOException $error) {
+        echo ("Request processing failed.");
+    }  
+}
+
+function getFullName($username){
+    try {
+
+        $connection = dbConnection();
+        $sql = "SELECT firstName,lastName FROM students WHERE username = :username; ";
+
+        $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
+        $preparedSql->bindParam(':username', $username);
+        $preparedSql->execute() or die("Failed to execute sql query."); 
+        $connection = null;  
+        return $preparedSql->fetch();
+   }
+    catch(PDOException $error) {
+        echo ("Request processing failed.");
+    }  
+}
+
 ?>
