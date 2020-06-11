@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Генериране на дати</title>
+    <link rel="stylesheet" type="text/css" href="../css/generateDate.css">
+    <script src="../js/generateDate.js" defer></script>
+
+</head>
+
+<body>
+    <header class="header">
+        <h2> Календар за презентиране</h2>
+        <button onclick="">Изход</button>
+    </header>
+    <hr>
+    <main class="form">
+        <h3>Генериране на часове за презентиране</h3>
+        <form method="POST" action="../php/generateDate.php">
+            <div class="input">
+                <label for="date">Изберете дата:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="input">
+                <label for="start">Въведете начален час:</label>
+                <input type="text" id="start" name="start" onchange="validateHour(this)" rquired placeholder="Въведете начален час">
+            </div>
+            <div class="input">
+                <label for="end">Въведете краен час:</label>
+                <input type="text" id="end" name="end" onchange="validateHour(this)" rquired placeholder="Въведете краен час">
+            </div>
+            <div class="input">
+                <label for="duration">Въведете продължителност на представянето:</label>
+                <input type="number" id="duration" name="duration" min="3" rquired placeholder="Въведете продължителност на представянето">
+            </div>
+            <div class="input">
+                <input type="button" class="reset" value="Отказ" onclick="window.location=''" />
+                <input type="submit" id="generate" name="generate" value="Генерирай">
+            </div>
+        </form>
+    </main>
+
+</body>
+
+</html>
