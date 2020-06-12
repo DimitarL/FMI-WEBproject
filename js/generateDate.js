@@ -12,28 +12,6 @@ if (mm < 10) {
 today = yyyy + '-' + mm + '-' + dd;
 document.getElementById("date").setAttribute("min", today);
 
-function validateStart(inputField) {
-    var isValid = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(inputField.value);
-
-    if (isValid) {
-        inputField.style.backgroundColor = '#bfa';
-    } else {
-        inputField.style.backgroundColor = '#fba';
-    }
-
-    return isValid;
-}
-
-function validateEnd(inputField) {
-    var isValid = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(inputField.value);
-    if (isValid && compare(document.getElementById("start").value, inputField.value)) {
-        inputField.style.backgroundColor = '#bfa';
-    } else {
-        inputField.style.backgroundColor = '#fba';
-    }
-    return isValid;
-}
-
 function compare(start, end) {
 
     var startTime = new Date().setHours(getHours(start), getMinutes(start), 0);
@@ -43,6 +21,9 @@ function compare(start, end) {
         return false;
     }
     if (startTime == endTime) {
+        document.getElementById("start").style.backgroundColor = '#fba';
+        document.getElementById("end").style.backgroundColor = '#fba';
+
         return false;
     }
     if (startTime < endTime) {
@@ -56,4 +37,24 @@ function getHours(d) {
 
 function getMinutes(d) {
     return parseInt(d.split(':')[1].split(' ')[0]);
+}
+
+function validate() {
+    let start = document.getElementById("start");
+    let end = document.getElementById("end");
+
+    var isValidStart = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(document.getElementById("start").value);
+    if (isValidStart) {
+        document.getElementById("start").style.backgroundColor = '#bfa';
+    } else {
+        document.getElementById("start").style.backgroundColor = '#fba';
+
+    }
+    var isValidEnd = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(document.getElementById("end").value);
+    if (isValidEnd) {
+        document.getElementById("end").style.backgroundColor = '#bfa';
+    } else {
+        document.getElementById("end").style.backgroundColor = '#fba';
+    }
+    return (isValidStart && isValidEnd && compare(document.getElementById("start").value, document.getElementById("end").value));
 }

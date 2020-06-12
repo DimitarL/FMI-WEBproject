@@ -18,22 +18,23 @@
     <hr>
     <main class="form">
         <h3>Генериране на часове за презентиране</h3>
-        <form method="POST" action="../php/generateDate.php">
+        <form method="POST" action="../php/generateDate.php" onSubmit="return validate();">
             <div class="input">
                 <label for="date">Изберете дата:</label>
                 <input type="date" id="date" name="date" required>
             </div>
             <div class="input">
                 <label for="start">Въведете начален час:</label>
-                <input type="text" id="start" name="start" onchange="validateStart(this)" required placeholder="Въведете начален час">
+                <input type="text" id="start" name="start" required placeholder="Въведете начален час">
             </div>
             <div class="input">
                 <label for="end">Въведете краен час:</label>
-                <input type="text" id="end" name="end" onchange="validateEnd(this)" required placeholder="Въведете краен час">
+                <input type="text" id="end" name="end" required placeholder="Въведете краен час">
+                <input type="text" id="error" hidden>
             </div>
             <div class="input">
                 <label for="duration">Въведете продължителност на представянето:</label>
-                <input type="number" id="duration" name="duration" min="3" required placeholder="Въведете продължителност на представянето">
+                <input type="number" id="duration" name="duration" min="3" max="10" required placeholder="Въведете продължителност на представянето">
             </div>
             <div class="input">
                 <input type="button" class="reset" value="Отказ" onclick="window.location=''" />
@@ -44,4 +45,4 @@
 
 </body>
 
-</html>
+</ht
