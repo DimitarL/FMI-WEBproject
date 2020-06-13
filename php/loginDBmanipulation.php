@@ -13,7 +13,7 @@ function checkData()
     $password = $_POST['password'];
     unset($_SESSION['errorMessage']);
 
-    $connection = db_connection();
+    $connection = dbConnection();
 
     $sql1 = "SELECT password FROM $userTableName WHERE username = :username";
     $result1 = $connection->prepare($sql1);
