@@ -30,19 +30,22 @@
             <div class="input">
                 <label for="end">Въведете краен час:</label>
                 <input type="text" id="end" name="end" required placeholder="Въведете краен час">
-                <input type="text" id="error" hidden>
             </div>
             <div class="input">
                 <label for="duration">Въведете продължителност на представянето:</label>
                 <input type="number" id="duration" name="duration" min="3" max="10" required placeholder="Въведете продължителност на представянето">
             </div>
+            <div class="message">
+                <span id="error"> </span>
+            </div>
             <div class="input">
-                <input type="button" class="reset" value="Отказ" onclick="window.location=''" />
+                <input type="button" class="reset" value="Отказ" onclick="window.location='../php/calendar.php'" />
                 <input type="submit" id="generate" name="generate" value="Генерирай">
             </div>
+
         </form>
     </main>
 
 </body>
 
-</ht
+</html>
