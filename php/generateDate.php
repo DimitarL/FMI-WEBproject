@@ -34,7 +34,7 @@ function createPresentationSlots($duration, $start, $end, $date)
             echo '<br>';
             $end = date('Y-m-d H:i', strtotime('+' . $duration . ' minutes', strtotime($start_time)));
             $start_time = $end;
-            // insertDateSlots($start);  
+            insertDateSlots($start);  
             $hours++;
         }
         if ($hours == 0) {
