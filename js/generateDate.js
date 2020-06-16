@@ -81,6 +81,5 @@ function validate() {
         document.getElementById("error").innerText = "Часът трябва да е във формат HH:MM.";
         end.style.backgroundColor = '#fba';
     }
-    document.getElementById("error").innerHTML = "I am here!";
     return (isValidStart && isValidEnd && compare(start.value, end.value) && compareCurrentDateTime(document.getElementById("date").value, start.value));
 }
