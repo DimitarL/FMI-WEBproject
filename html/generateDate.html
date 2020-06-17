@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Генериране на дати</title>
     <link rel="stylesheet" type="text/css" href="../css/generateDate.css">
-    <script src="../js/generateDate.js" defer></script>
-
+    <script type="module" src="../js/generateDate.js" defer></script>
 </head>
 
 <body>
@@ -18,7 +17,7 @@
     <hr>
     <main class="form">
         <h3>Генериране на часове за презентиране</h3>
-        <form method="POST" action="../php/generateDate.php" onSubmit="return validate();">
+        <form method="POST">
             <div class="input">
                 <label for="date">Изберете дата:</label>
                 <input type="date" id="date" name="date" required>
@@ -40,7 +39,7 @@
             </div>
             <div class="input">
                 <input type="button" class="reset" value="Отказ" onclick="window.location='../php/calendar.php'" />
-                <input type="submit" id="generate" name="generate" value="Генерирай">
+                <input type="button" id="generate" name="generate" value="Генерирай" />
             </div>
 
         </form>

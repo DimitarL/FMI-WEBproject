@@ -1,3 +1,5 @@
+import { ajax_json } from './ajax.js';
+
 var date = new Date();
 var day = date.getDate();
 var month = date.getMonth() + 1;
@@ -23,7 +25,10 @@ document.getElementById("date").setAttribute("min", today);
 
 var time = hour + ":" + minutes;
 var dateTime = today + ' ' + time;
-console.log(dateTime);
+document.getElementById('generate').addEventListener('click', () => {
+    validate();
+    return false;
+})
 
 function compare(start, end) {
 
@@ -53,10 +58,11 @@ function compareCurrentDateTime(date, start) {
         document.getElementById("error").innerText = "Не може да избирате минал час за днес.";
         return false;
     }
+    return true;
 }
 
 function getHours(d) {
-    return h = parseInt(d.split(':')[0]);
+    return parseInt(d.split(':')[0]);
 }
 
 function getMinutes(d) {
@@ -81,5 +87,23 @@ function validate() {
         document.getElementById("error").innerText = "Часът трябва да е във формат HH:MM.";
         end.style.backgroundColor = '#fba';
     }
-    return (isValidStart && isValidEnd && compare(start.value, end.value) && compareCurrentDateTime(document.getElementById("date").value, start.value));
+
+    if (isValidStart && isValidEnd && compare(start.value, end.value) && compareCurrentDateTime(document.getElementById("date").value, start.value)) {
+        let date = document.getElementById('date').value;
+        let start = document.getElementById('start').value;
+        let end = document.getElementById('end').value;
+        let duration = document.getElementById('duration').value;
+
+        let json = { date, start, end, duration };
+
+        let callback = function(msg) {
+            if (msg == "1") {
+                console.log("Dates are generated.");
+                window.location = '../php/calendar.php';
+            } else {
+                document.getElementById('error').innerText = msg;
+            }
+        };
+        ajax_json('POST', '../php/generateDate.php', { success: callback }, JSON.stringify(json));
+    }
 }

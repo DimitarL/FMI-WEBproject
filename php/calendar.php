@@ -26,6 +26,7 @@
                     <th>Курс</th>
                     <th>Група</th>
                     <th>Презентация</th>
+                    <th>Тема</th>
                     <th>Покана</th>
                 </tr>
             </thead>
@@ -33,7 +34,7 @@
                 <?php
                 include './db_connection.php';
                 $conn = dbConnection();
-                $sql = "SELECT d.timeDate, s.firstName, s.lastName, s.course, s.groupNumber, p.presentation, p.invitation FROM presentations p INNER JOIN students s on p.username=s.username LEFT JOIN dates d on d.timeDate=p.timeDate  ORDER BY p.timeDate";
+                $sql = "SELECT d.timeDate, s.firstName, s.lastName, s.course, s.groupNumber, p.presentation, p.invitation, p.topic FROM presentations p INNER JOIN students s on p.username=s.username LEFT JOIN dates d on d.timeDate=p.timeDate  ORDER BY p.timeDate";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute() or die("Failed to query from DB!");
                 while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
@@ -57,6 +58,9 @@
                             <?php echo $result["presentation"] ?>
                         </td>
                         <td>
+                            <?php echo $result["topic"] ?>
+                        </td>
+                        <td>
                             <a href="<?php echo $result["invitation"] ?>" alt="invitation" download>
                                 <p>Изтегли поканата</p>
                             </a>
@@ -71,6 +75,9 @@
                     <tr>
                         <td>
                             <?php echo $result["timeDate"] ?>
+                        </td>
+                        <td>
+                            <?php echo "" ?>
                         </td>
                         <td>
                             <?php echo "" ?>
