@@ -69,6 +69,15 @@ function getMinutes(d) {
     return parseInt(d.split(':')[1].split(' ')[0]);
 }
 
+function validateDuration() {
+    if (document.getElementById("duration").value < 3 || document.getElementById("duration").value > 10) {
+        document.getElementById("duration").style.backgroundColor = '#fba';
+        document.getElementById("error").innerText = "Продължителността е от 3 до 10 минути.";
+        return false;
+    }
+    return true;
+}
+
 function validate() {
     var start = document.getElementById("start");
     var end = document.getElementById("end");
@@ -88,7 +97,7 @@ function validate() {
         end.style.backgroundColor = '#fba';
     }
 
-    if (isValidStart && isValidEnd && compare(start.value, end.value) && compareCurrentDateTime(document.getElementById("date").value, start.value)) {
+    if (isValidStart && isValidEnd && validateDuration() && compare(start.value, end.value) && compareCurrentDateTime(document.getElementById("date").value, start.value)) {
         let date = document.getElementById('date').value;
         let start = document.getElementById('start').value;
         let end = document.getElementById('end').value;
