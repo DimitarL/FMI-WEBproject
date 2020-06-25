@@ -1,0 +1,181 @@
+html {
+    display: grid;
+    min-height: 100%;
+    background-color: #121036;
+}
+
+.header {
+    font-family: "Times New Roman", Times, serif;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #F6F4F3;
+}
+
+.container {
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    width: 650px;
+    height: 450px;
+}
+
+.balloon {
+    border: 1px solid black;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+}
+
+.editionBalloon .balloonHandle {
+    clip-path: polygon(44% 1%, 20% 48%, 33% 57%, 38% 77%, 22% 37%, 43% 1%);
+    -webkit-clip-path: polygon(44% 1%, 20% 48%, 33% 57%, 38% 77%, 22% 37%, 43% 1%);
+    height: 25px;
+    margin-top: -5px;
+    margin-left: -25px;
+    border: 30px solid #facd3d;
+}
+
+.secondsBalloon .balloonHandle {
+    clip-path: polygon(44% 1%, 20% 48%, 33% 57%, 38% 77%, 22% 37%, 43% 1%);
+    -webkit-clip-path: polygon(44% 1%, 20% 48%, 33% 57%, 38% 77%, 22% 37%, 43% 1%);
+    height: 25px;
+    margin-top: -5px;
+    margin-left: -25px;
+    border: 30px solid #F6F4F3;
+}
+
+.minutesBalloon .balloonHandle {
+    clip-path: polygon(44% 1%, 20% 48%, 33% 57%, 38% 77%, 22% 37%, 43% 1%);
+    -webkit-clip-path: polygon(44% 1%, 20% 48%, 33% 57%, 38% 77%, 22% 37%, 43% 1%);
+    height: 20px;
+    margin-top: -5px;
+    margin-left: -25px;
+    border: 40px solid #e60576;
+}
+
+.wLetterYellow {
+    margin-top: -25px;
+    font-size: 25px;
+    color: #facd3d;
+}
+
+.wLetterPink {
+    margin-top: -20px;
+    margin-left: 60px;
+    color: #e60576;
+    font-size: 25px;
+}
+
+.wLetterWhite {
+    margin-top: -20px;
+    margin-left: 60px;
+    color: #F6F4F3;
+    font-size: 25px;
+}
+
+.balloonText {
+    text-align: center;
+    position: absolute;
+    font-family: "Times New Roman", Times, serif;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #121036;
+    top: 20%;
+    left: 20%;
+}
+
+.editionBalloon {
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    top: 9%;
+    left: 8%;
+    background: #F6F4F3;
+}
+
+.minutesBalloon {
+    position: absolute;
+    height: 85px;
+    width: 75px;
+    top: 2%;
+    left: 20%;
+    background: #facd3d;
+    margin-left: 60px;
+}
+
+.secondsBalloon {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    top: 5%;
+    left: 60%;
+    background: #e60576;
+}
+
+.balloonHandle {
+    position: absolute;
+    height: 70px;
+    width: 1px;
+    top: 100%;
+    left: 48%;
+    z-index: -1;
+}
+
+#timer {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    margin-top: 25%;
+    color: #F6F4F3;
+}
+
+.edition, .minutes, .seconds {
+    display: inline-block;
+    width: 100px;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.againButton {
+    display: inline-block;
+    width: 100px;
+    height: 18px;
+    border-radius: 8px;
+    padding-top: 1px;
+    padding-bottom: 17px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.edition {
+    background: #e60576;
+    margin-right: 40px;
+}
+
+.minutes {
+    background: #F6F4F3;
+    color: #121036;
+}
+
+.seconds {
+    background: #facd3d;
+}
+
+.againButton {
+    background: #e60576;
+}
+
+.buttonStyle {
+    background: #e60576;
+    color: #F6F4F3;
+    border: none;
+    font: size 13px;
+    font-weight: bold;
+}
+
+.numbers {
+    font-family: 'Roboto', sans-serif;
+    color: #183059;
+    font-size: 48px;
+}
