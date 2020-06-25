@@ -1,12 +1,12 @@
 import { ajax_json } from './ajax.js';
 
-let isLetor;
+let isLector;
 
 isLector();
 
 if (isLector) {
     let btn = document.createElement("BUTTON");
-    btn.innerHTML = "Спистък с присъстващи";
+    btn.innerHTML = "Списък с присъстващи";
     btn.id = "getFile";
     document.getElementById("presentButton").appendChild(btn);
 
