@@ -1,14 +1,16 @@
 import { ajax_json } from './ajax.js';
 
-let isLector;
+let hasLectoreRole;
 
 isLector();
 
-if (isLector) {
-    let btn = document.createElement("BUTTON");
-    btn.innerHTML = "Списък с присъстващи";
-    btn.id = "getFile";
-    document.getElementById("presentButton").appendChild(btn);
+if (hasLectoreRole) {
+    // let btn = document.createElement("BUTTON");
+    // btn.innerHTML = "Списък с присъстващи";
+    // btn.id = "getFile";
+    // document.getElementById("presentButton").appendChild(btn);
+
+    document.getElementById("presentButton").style.visibility = "visible";
 
     document.getElementById('getFile').addEventListener('click', function() {
         let callback = function(data) {
@@ -30,9 +32,9 @@ if (isLector) {
 function isLector() {
     let callback = function(msg) {
         if (msg == "1") {
-            isLector = true;
+            hasLectoreRole = true;
         } else {
-            isLector = false;
+            hasLectoreRole = false;
         }
     }
     ajax_json("GET", "../php/is_lector.php", { success: callback });
