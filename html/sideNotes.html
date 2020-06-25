@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta http-equiv="content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+    <title>Споделени бележки</title>
+    <link href="../css/sideNotes.css" rel="stylesheet" />
+    <script src="../js/sideNotes.js"></script>
+</head>
+
+<body onload="timer()">
+    <div>
+        <header class="header">
+            <h1>Споделени бележки</h1>
+        </header>
+
+        <main>
+            <form class="informationForm" method="POST" enctype="multipart/form-data">
+                <textarea id="inputNotes" name="inputNotes" placeholder="Въведи коментар..."></textarea>
+
+                <div class="mainButtons">
+                    <button type="button" class="submitButton" onclick="submitFunction()">Запиши</button>
+                    <button type="button" class="downloadButton" onclick="downloadFunction()">Свали</button>
+                </div>
+            </form>
+
+            <div id="timer"></div>
+            <div id="sharedNotes"></div>
+        </main>
+</body>
+
+</html>

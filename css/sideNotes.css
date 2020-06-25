@@ -1,0 +1,40 @@
+html {
+    display: grid;
+    min-height: 100%;
+    font-family: "Times New Roman", Times, serif;
+    background-color: #effbe9;
+}
+
+#inputNotes {
+    width: 280px;
+    height: 100px;
+    resize: none;
+}
+
+.mainButtons button {
+    display: inline-block;
+    width: 100px;
+    border-radius: 5px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.submitButton {
+    margin-right: 6.3%;
+}
+
+#sharedNotes {
+    border: 2px solid black;
+    width: 30%;
+}
+
+.notesTitle {
+    margin-left: 5px;
+}
+
+.counter {
+    display: inline;
+    font-weight: bold;
+    margin-left: 5px;
+}
