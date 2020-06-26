@@ -1,8 +1,15 @@
 <?php
 
+
+if(!session_id()){
+    session_start();
+}
+
+$username = $_SESSION["username"];
+
 $input_json = file_get_contents('php://input');
 // $fileName = $_POST['username'] . "_" . preg_replace("/(\W)+/", "", $_POST['topic']);
-$fileName = $_POST['username'] . "_" . rand(10,100000);
+$fileName = $username . "_" . rand(10,100000);
 $fileToUpload = "file";
 
 $targetFile = checkImage($fileToUpload, $fileName);
