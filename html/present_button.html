@@ -8,17 +8,21 @@
     <title> Title </title>
     <script defer type="module" src="../js/get_present.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/presentation_record.css">
+    <link rel="stylesheet" type="text/css" href="../css/present_section.css">
 
 </head>
 
-<body>
+<body id="presentStudents">
     <header class="header">
         <h2> Календар за презентиране</h2>
         <button onclick="">Изход</button>
     </header>
     <hr>
     <main class="form-container">
-        <div id="presentButton" visibility="hidden">
+        <div class="students" id="students">
+
+        </div>
+        <div class="presentButton" id="presentButton" visibility="hidden">
             <button type="button" id="getFile">Списък с присътващи</button>
         </div>
     </main>

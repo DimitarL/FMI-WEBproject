@@ -1,10 +1,10 @@
 import { ajax_json } from './ajax.js';
 
-let hasLectoreRole;
+let hasLectorRole;
 
 isLector();
 
-if (hasLectoreRole) {
+if (hasLectorRole) {
     // let btn = document.createElement("BUTTON");
     // btn.innerHTML = "Списък с присъстващи";
     // btn.id = "getFile";
@@ -32,10 +32,37 @@ if (hasLectoreRole) {
 function isLector() {
     let callback = function(msg) {
         if (msg == "1") {
-            hasLectoreRole = true;
+            hasLectorRole = true;
         } else {
-            hasLectoreRole = false;
+            hasLectorRole = false;
         }
     }
     ajax_json("GET", "../php/is_lector.php", { success: callback });
+}
+
+document.getElementById('presentStudents').addEventListener('load', timer, false);
+
+function timer() {
+
+    let timer = setInterval(function() {
+        printStudents();
+    }, 1000);
+}
+
+window.onload = function() {
+    timer();
+}
+
+function printStudents() {
+    let callback = function(data) {
+        data = data.split("\n")
+            .sort()
+            .splice(1);
+
+        for (let i in data) {
+            data[i] = "<div class='studentPresent' >" + data[i] + "</div><hr>";
+        }
+        document.getElementById('students').innerHTML = data.join("\n");
+    }
+    ajax_json("GET", "../php/get_present.php", { success: callback });
 }
