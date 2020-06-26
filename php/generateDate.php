@@ -13,14 +13,20 @@ $endDate = $date . $interval . $endHour;
 
 function getCountBetweenTwoDates($startDate, $endDate)
 {
-    $conn = dbConnection();
-    $sql = "SELECT timeDate FROM dates";
-    $sql = "SELECT count(timeDate) FROM dates where timedate between :startDate and :endDate";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(":startDate", $startDate);
-    $stmt->bindParam(":endDate", $endDate);
-    $stmt->execute() or die("Failed to query from DB!");
-    return $stmt->fetchColumn();
+    try {
+        $conn = dbConnection();
+        $sql = "SELECT timeDate FROM dates";
+        $sql = "SELECT count(timeDate) FROM dates where timedate between :startDate and :endDate";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(":startDate", $startDate);
+        $stmt->bindParam(":endDate", $endDate);
+        $stmt->execute() or die("Failed to query from DB!");
+        return $stmt->fetchColumn();
+        $conn = null;
+    } catch (PDOException $error) {
+        echo ("Проблем със свързването с базата.Моля опитайте пак по-късно.");
+        return false;
+    }
 }
 
 function createPresentationSlots($duration, $start, $end, $date)
@@ -32,7 +38,7 @@ function createPresentationSlots($duration, $start, $end, $date)
         $end_time = $end;
         while (strtotime('+' . $duration . ' minutes', strtotime($start_time)) <= strtotime($end_time)) {
             $end = date('Y-m-d H:i', strtotime('+' . $duration . ' minutes', strtotime($start_time)));
-            insertDateSlots($start_time);
+            insertDateSlots($start_time, $duration);
             $start_time = $end;
             $hours++;
         }
@@ -47,13 +53,14 @@ function createPresentationSlots($duration, $start, $end, $date)
 }
 $result = createPresentationSlots($durationPresentation, $startDate, $endDate, $date, $endHour);
 echo $result;
-function insertDateSlots($date)
+function insertDateSlots($date, $durationPresentation)
 {
     try {
         $conn = dbConnection();
-        $sql = "INSERT INTO dates (timeDate) values (:datePlaceholder);";
+        $sql = "INSERT INTO dates (timeDate, duration) values (:datePlaceholder, :durationPlaceholder);";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":datePlaceholder", $date);
+        $stmt->bindParam(":durationPlaceholder", $durationPresentation);
         $stmt->execute() or die("Failed!");
         $conn = null;
     } catch (PDOException $error) {
