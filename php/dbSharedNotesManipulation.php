@@ -18,6 +18,8 @@ function insertInTable($inputNotes)
             $preparedSql->execute() or die("Неуспешно изпълнение на SQL заявката!" . "<br>");
         }
         echo "Данните са добавени успешно!" . "<br>";
+
+        $connection = null;
     } catch (PDOException $error) {
         echo $error->getMessage();
     }
@@ -40,6 +42,8 @@ function printContentOfTable()
             echo "<div class=\"counter\">$counter. </div>" . $row["inputNotes"] . "<br/><br/>";
             $counter++;
         }
+
+        $connection = null;
     } catch (PDOException $error) {
         echo $error->getMessage();
     }
