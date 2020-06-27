@@ -11,11 +11,9 @@
 
 <body onload="timer()">
     <div>
-        <header class="header">
-            <h1>Споделени бележки</h1>
-        </header>
-
         <main>
+            <div id="sharedNotes"></div>
+            
             <form class="informationForm" method="POST" enctype="multipart/form-data">
                 <textarea id="inputNotes" name="inputNotes" placeholder="Въведи коментар..."></textarea>
 
@@ -26,7 +24,6 @@
             </form>
 
             <div id="timer"></div>
-            <div id="sharedNotes"></div>
         </main>
 </body>
 

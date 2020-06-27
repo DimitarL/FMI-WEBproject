@@ -6,8 +6,8 @@ html {
 }
 
 #inputNotes {
-    width: 280px;
-    height: 100px;
+    width: 315px;
+    height: 80px;
     resize: none;
 }
 
@@ -21,16 +21,22 @@ html {
 }
 
 .submitButton {
-    margin-right: 6.3%;
+    margin-right: 9%;
 }
 
 #sharedNotes {
     border: 2px solid black;
-    width: 30%;
+    width: 25%;
+    height: 360px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .notesTitle {
+    font-weight: bold;
     margin-left: 5px;
+    font-size: 25px;
 }
 
 .counter {
