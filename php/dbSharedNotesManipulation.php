@@ -1,14 +1,14 @@
 <?php
 include "db_connection.php";
 
-$table_name = "shared_notes";
+$table_name = "sharedNotes";
 
 function insertInTable($inputNotes)
 {
     global $table_name;
     try {
         $connection = dbConnection();
-        $sql = "INSERT INTO shared_notes(inputNotes) 
+        $sql = "INSERT INTO sharedNotes(inputNotes) 
             VALUES (:inputNotes)";
 
         $preparedSql = $connection->prepare($sql) or die("Свързването е неуспешно!" . "<br>");
