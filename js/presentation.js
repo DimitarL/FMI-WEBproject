@@ -14,9 +14,13 @@ window.onload = function() {
 }
 
 function showPresentation() {
-
     let callback = function(data) {
-        document.getElementById('currentPresentation').innerHTML = data;
+        if (data == "") {
+            document.getElementById('currentPresentation').innerHTML = "В момента няма презентиращи";
+
+        } else {
+            document.getElementById('currentPresentation').innerHTML = '<a href="' + data + '"target="_blank">Линк</a>';
+        }
     }
     ajax_json("GET", "../php/presentation.php", { success: callback });
 }
