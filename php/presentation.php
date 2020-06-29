@@ -2,10 +2,10 @@
 include './db_connection.php';
 
 date_default_timezone_set('Europe/Sofia');
-//$date = date('Y-m-d H:i');
+$date = date('Y-m-d H:i');
 
 //echo $date;
-$date= "2020-06-29 11:00";
+//$date= "2020-06-29 11:00";
 
 function getPresentation($date)
 {
