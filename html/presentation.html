@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Презентации </title>
+    <script defer type="module" src="../js/get_present.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/presentation_record.css">
+    <link rel="stylesheet" type="text/css" href="../css/present_section.css">
+    <link rel="stylesheet" type="text/css" href="../css/presentation.css">
+    <link href="../css/timer.css" rel="stylesheet" />
+    <script src="../js/timer.js"></script>
+    <link href="../css/sideNotes.css" rel="stylesheet" />
+    <script src="../js/sideNotes.js"></script>
+    <script defer type="module" src="../js/presentation.js"></script>
+
+
+</head>
+
+<body id="presentStudents" onload="timer()">
+    <div id="showPresentation">
+        <header class="header">
+            <h2> Календар за презентиране</h2>
+            <button onclick="">Изход</button>
+        </header>
+        <hr>
+        <main class="row">
+            <div class="notes">
+                <div id="sharedNotes"></div>
+                <form class="informationForm" method="POST" enctype="multipart/form-data">
+                    <textarea id="inputNotes" name="inputNotes" placeholder="Въведи коментар..."></textarea>
+
+                    <div class="mainButtons">
+                        <button type="button" class="submitButton" onclick="submitFunction()">Запиши</button>
+                        <button type="button" class="downloadButton" onclick="downloadFunction()">Свали</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="container timer">
+                <div class="balloon editionBalloon">
+                    <div class="wLetterYellow">
+                        <h3>w</h3>
+                    </div>
+                    <div class="balloonText">
+                        <h2>Ре</h2>
+                    </div>
+                    <div class="balloonHandle"></div>
+                </div>
+
+                <div class="balloon minutesBalloon">
+                    <div class="wLetterPink">
+                        <h3>w</h3>
+                    </div>
+                    <div class="balloonText">
+                        <h2>Фе</h2>
+                    </div>
+                    <div class="balloonHandle"></div>
+                </div>
+
+                <div class="balloon secondsBalloon">
+                    <div class="wLetterWhite">
+                        <h3>w</h3>
+                    </div>
+                    <div class="balloonText">
+                        <h2>Рат</h2>
+                    </div>
+                    <div class="balloonHandle"></div>
+                </div>
+
+                <div id="timer"></div>
+                <div id="clearTimer"></div>
+                <div class="presentation">
+                    <div class="presentation">Текуща презентация:</div>
+                    <a href="" class="showPresentation" id="currentPresentation"></a>
+                </div>
+            </div>
+            <div class="form-container present">
+                <div class="students" id="students">
+
+                </div>
+                <div class="presentButton" id="presentButton" visibility="hidden">
+                    <button type="button" id="getFile">Списък с присътващи</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
