@@ -24,6 +24,11 @@ html {
     margin-right: 9%;
 }
 
+.downloadButton{
+    text-decoration: none;
+    color: black;
+}
+
 #sharedNotes {
     border: 2px solid black;
     width: 25%;
