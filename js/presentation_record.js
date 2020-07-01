@@ -28,8 +28,7 @@ document.getElementById('submitButton').addEventListener('click', () => {
 // })
 
 function addPresentation() {
-    // let username = $_SESSION['user'];
-    let username = 'asimeonov';
+    // let username = 'asimeonov';
 
     const topicId = 'topic';
     const dateId = 'date';
@@ -48,7 +47,7 @@ function addPresentation() {
         }
 
         let formData = new FormData();
-        formData.append('username', username);
+        // formData.append('username', username);
         formData.append('topic', document.getElementById(topicId).value);
         formData.append('file', file);
 
@@ -59,7 +58,7 @@ function addPresentation() {
             let invitation = uploadFile;
             let timeDate = document.getElementById(dateId).value;
 
-            let data = { topic, username, presentation, invitation, timeDate };
+            let data = { topic, presentation, invitation, timeDate };
             insertPresentationData(data);
         } else {
             console.log("UPLOAD FILE IN: " + uploadFile);

@@ -28,7 +28,8 @@ function checkData()
         $hash = $result1->fetch(PDO::FETCH_ASSOC);
         if (password_verify($password, $hash['password'])) {
             $_SESSION["role"] = "student";
-            header("location: welcome.html");
+            $_SESSION["username"] = $username;
+            header("location: calendar.php");
         } else {
             $_SESSION['errorMessage'] = 1;
             die(header("location: loginStart.php"));
@@ -39,6 +40,7 @@ function checkData()
             $hash = $result2->fetch(PDO::FETCH_ASSOC);
             if (password_verify($password, $hash['password'])) {
                 $_SESSION["role"] = "admin";
+                $_SESSION["username"] = $username;
                 header("location: ../html/welcome.html");
             } else {
                 $_SESSION['errorMessage'] = 1;

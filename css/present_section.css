@@ -1,0 +1,32 @@
+.students {
+    width: 85%;
+    height: 380px;
+    /* width: 80%; */
+    /* height: 600px; */
+    overflow-y: scroll;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.presentButton {
+    margin-top: 20px;
+}
+
+.presentButton button {
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: #d9eae0;
+    color: black;
+    border: 3px double black;
+}
+
+.presentButton button:hover {
+    cursor: pointer;
+    background-color: #CAECD8;
+}
+
+.studentPresent {
+    padding: 10px;
+}

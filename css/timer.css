@@ -1,20 +1,21 @@
 html {
     display: grid;
     min-height: 100%;
-    background-color: #121036;
+    /* background-color: #121036; */
 }
 
-.header {
+
+/*.header {
     font-family: "Times New Roman", Times, serif;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 5px;
     color: #F6F4F3;
-}
+}*/
 
 .container {
     position: relative;
-    margin: auto;
+    /* margin: auto; */
     overflow: hidden;
     width: 650px;
     height: 450px;
@@ -40,7 +41,7 @@ html {
     height: 25px;
     margin-top: -5px;
     margin-left: -25px;
-    border: 30px solid #F6F4F3;
+    border: 30px solid #facd3d;
 }
 
 .minutesBalloon .balloonHandle {
@@ -130,7 +131,9 @@ html {
     color: #F6F4F3;
 }
 
-.edition, .minutes, .seconds {
+.edition,
+.minutes,
+.seconds {
     display: inline-block;
     width: 100px;
     border-radius: 8px;
@@ -156,6 +159,7 @@ html {
 .minutes {
     background: #F6F4F3;
     color: #121036;
+    border: 1px solid black;
 }
 
 .seconds {

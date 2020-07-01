@@ -6,18 +6,25 @@ html {
 }
 
 #inputNotes {
-    width: 315px;
+    /* width: 315px; */
+    width: 100%;
     height: 80px;
     resize: none;
+    border-radius: 10px;
 }
 
 .mainButtons button {
     display: inline-block;
     width: 100px;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     padding: 10px 10px 10px 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+    background-color: #d9eae0;
+    color: black;
+    border: 3px double black;
 }
 
 .submitButton {
@@ -25,12 +32,15 @@ html {
 }
 
 #sharedNotes {
-    border: 2px solid black;
-    width: 25%;
-    height: 360px;
+    border: 1px solid black;
+    border-radius: 10px;
+    /* border: 2px solid black; */
+    width: 100%;
+    height: 300px;
     overflow-y: scroll;
     margin-bottom: 10px;
     margin-top: 10px;
+    background-color: white;
 }
 
 .notesTitle {
