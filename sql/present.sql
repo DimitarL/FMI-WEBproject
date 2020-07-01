@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS `presentationCalendar`;
 USE `presentationCalendar`;
 
 CREATE TABLE IF NOT EXISTS present (
-    username VARCHAR(64), 
+    username VARCHAR(64) UNIQUE, 
     CONSTRAINT fkUser FOREIGN KEY (username)
     REFERENCES students(username)  
 );
