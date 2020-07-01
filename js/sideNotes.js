@@ -30,7 +30,6 @@ function downloadFunction() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       document.getElementById("sharedNotes").innerHTML = this.responseText;
-      alert("Бележките са успешно свалени!");
     }
   };
 
