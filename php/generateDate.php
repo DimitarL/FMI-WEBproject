@@ -38,7 +38,7 @@ function createPresentationSlots($duration, $start, $end, $date)
         $end_time = $end;
         while (strtotime('+' . $duration . ' minutes', strtotime($start_time)) <= strtotime($end_time)) {
             $end = date('Y-m-d H:i', strtotime('+' . $duration . ' minutes', strtotime($start_time)));
-            insertDateSlots($start_time, $duration);
+            insertDateSlots($start_time,$end, $duration);
             $start_time = $end;
             $hours++;
         }
@@ -53,13 +53,14 @@ function createPresentationSlots($duration, $start, $end, $date)
 }
 $result = createPresentationSlots($durationPresentation, $startDate, $endDate, $date, $endHour);
 echo $result;
-function insertDateSlots($date, $durationPresentation)
+function insertDateSlots($date, $end, $durationPresentation)
 {
     try {
         $conn = dbConnection();
-        $sql = "INSERT INTO dates (timeDate, duration) values (:datePlaceholder, :durationPlaceholder);";
+        $sql = "INSERT INTO dates (timeDate, timeEnd, duration) values (:datePlaceholder, :timeEndPlaceholder, :durationPlaceholder);";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":datePlaceholder", $date);
+        $stmt->bindParam(":timeEndPlaceholder", $end);
         $stmt->bindParam(":durationPlaceholder", $durationPresentation);
         $stmt->execute() or die("Failed!");
         $conn = null;
