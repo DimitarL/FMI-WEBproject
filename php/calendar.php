@@ -113,7 +113,7 @@
             ?>
                 <input type="submit" value="Запиши се!" onclick="window.location='../html/presentation_record.html'">
             <?php } ?>
-            <input type="submit" value="Към презентацията" onclick="window.location=''">
+            <input type="submit" value="Към презентацията" onclick="window.location='../html/presentation.html'">
         </div>
     </main>
 </body>
