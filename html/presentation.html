@@ -37,58 +37,60 @@
 
                     <div class="mainButtons">
                         <button type="button" class="submitButton" onclick="submitFunction()">Запиши</button>
-                        <button type="button" class="downloadButton" onclick="downloadFunction()">Свали</button>
+                        <button type="button" onclick="downloadFunction()"><a class="downloadButton"
+                                href="../php/downloaded_Notes.txt" download>Изтегли</a></button>
                     </div>
-                </form>
             </div>
+            </form>
+    </div>
 
-            <div class="container timer">
-                <div class="balloon editionBalloon">
-                    <div class="wLetterYellow">
-                        <h3>w</h3>
-                    </div>
-                    <div class="balloonText">
-                        <h2>Ре</h2>
-                    </div>
-                    <div class="balloonHandle"></div>
-                </div>
-
-                <div class="balloon minutesBalloon">
-                    <div class="wLetterPink">
-                        <h3>w</h3>
-                    </div>
-                    <div class="balloonText">
-                        <h2>Фе</h2>
-                    </div>
-                    <div class="balloonHandle"></div>
-                </div>
-
-                <div class="balloon secondsBalloon">
-                    <div class="wLetterWhite">
-                        <h3>w</h3>
-                    </div>
-                    <div class="balloonText">
-                        <h2>Рат</h2>
-                    </div>
-                    <div class="balloonHandle"></div>
-                </div>
-
-                <div id="timer"></div>
-                <div id="clearTimer"></div>
-                <div class="presentation">
-                    <div class="presentation" id="presentation">Текуща презентация:</div>
-                    <span id="currentPresentation"><a></a></span>
-                </div>
+    <div class="container timer">
+        <div class="balloon editionBalloon">
+            <div class="wLetterYellow">
+                <h3>w</h3>
             </div>
-            <div class="form-container present">
-                <div class="students" id="students">
-
-                </div>
-                <div class="presentButton" id="presentButton" visibility="hidden">
-                    <button type="button" id="getFile">Списък с присътващи</button>
-                </div>
+            <div class="balloonText">
+                <h2>Ре</h2>
             </div>
-        </main>
+            <div class="balloonHandle"></div>
+        </div>
+
+        <div class="balloon minutesBalloon">
+            <div class="wLetterPink">
+                <h3>w</h3>
+            </div>
+            <div class="balloonText">
+                <h2>Фе</h2>
+            </div>
+            <div class="balloonHandle"></div>
+        </div>
+
+        <div class="balloon secondsBalloon">
+            <div class="wLetterWhite">
+                <h3>w</h3>
+            </div>
+            <div class="balloonText">
+                <h2>Рат</h2>
+            </div>
+            <div class="balloonHandle"></div>
+        </div>
+
+        <div id="timer"></div>
+        <div id="clearTimer"></div>
+        <div class="presentation">
+            <div class="presentation" id="presentation">Текуща презентация:</div>
+            <span id="currentPresentation"><a></a></span>
+        </div>
+    </div>
+    <div class="form-container present">
+        <div class="students" id="students">
+
+        </div>
+        <div class="presentButton" id="presentButton" visibility="hidden">
+            <button type="button" id="getFile">Списък с присътващи</button>
+        </div>
+    </div>
+    </main>
     </div>
 </body>
 
