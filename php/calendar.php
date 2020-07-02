@@ -13,7 +13,7 @@
     session_start(); ?>
     <header class="header">
         <h2> Календар за презентиране</h2>
-        <a href='../php/logout.php'><button id="goToLogIn"> Изход </button></a>
+        <a href='../php/logout.php'><button> Изход </button></a>
         <!--<button onclick="">Изход</button>-->
     </header>
     <hr>
