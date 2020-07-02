@@ -10,5 +10,7 @@ CREATE TABLE IF NOT EXISTS presentations (
     timeDate timestamp,
     CONSTRAINT fkDate FOREIGN KEY (timeDate)
     REFERENCES dates(timeDate) ON UPDATE CASCADE,
+    CONSTRAINT fkStudent FOREIGN KEY (username)
+    REFERENCES students(username) ON UPDATE CASCADE,
     PRIMARY KEY(topic, username)
 );
