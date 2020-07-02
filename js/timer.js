@@ -1,6 +1,6 @@
 const year = new Date().getFullYear();
 const timeInFuture = new Date().getTime() + 7 * 60000;
-console.log(timeInFuture);
+// console.log(timeInFuture);
 
 let timer = setInterval(function() {
     const today = new Date().getTime();
@@ -44,7 +44,7 @@ function refresh() {
 function startNewTimer() {
     const year = new Date().getFullYear();
     const timeInFuture = new Date().getTime() + 7 * 60000;
-    console.log(timeInFuture);
+    // console.log(timeInFuture);
 
     timer = setInterval(function() {
         const today = new Date().getTime();

@@ -1,8 +1,9 @@
-/** {
+/* * {
     box-sizing: border-box;
-}*/
+} */
 
 .notes {
+    /* background-color: blueviolet; */
     float: left;
     width: 20%;
     padding: 10px;
@@ -20,6 +21,7 @@
 }
 
 .present {
+    /* background-color: blueviolet; */
     float: left;
     width: 20%;
     padding: 10px;

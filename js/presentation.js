@@ -1,17 +1,24 @@
 import { ajax_json } from './ajax.js';
+import { printStudents } from './get_present.js';
+import { printContent } from './sideNotes.js';
 
-document.getElementById('showPresentation').addEventListener('load', timer, false);
+// document.getElementById('showPresentation').addEventListener('load', timer, false);
 
-function timer() {
+document.getElementById('goToCalendar').addEventListener('click', goToCalendar);
+document.getElementById('goToLogIn').addEventListener("click", goToLogIn);
 
+
+function customTimer() {
     let timer = setInterval(function() {
         showPresentation();
+        printStudents();
+        printContent();
     }, 1000);
 }
 
 window.onload = function() {
     addUsernameToPresentTable();
-    timer();
+    customTimer();
 }
 
 function showPresentation() {
@@ -36,11 +43,11 @@ function addUsernameToPresentTable() {
 }
 
 function deleteUsernameFromPresentTable(link) {
-    console.log("deleteUsernameFromPresentTable");
     let callback = function(data) {
-        console.log(data + " data");
         if (data != "1") {
             alert(data);
+        } else {
+            window.location = link;
         }
     }
     ajax_json("DELETE", "../php/present_manipulation.php", { success: callback });
@@ -52,6 +59,6 @@ function goToCalendar() {
 }
 
 function goToLogIn() {
-    let redirect = "../php/loginStart.php";
+    let redirect = "../index.php";
     deleteUsernameFromPresentTable(redirect);
 }

@@ -5,10 +5,10 @@ let hasLectorRole;
 isLector();
 
 if (hasLectorRole) {
-    // let btn = document.createElement("BUTTON");
-    // btn.innerHTML = "Списък с присъстващи";
-    // btn.id = "getFile";
-    // document.getElementById("presentButton").appendChild(btn);
+    let btn = document.createElement("BUTTON");
+    btn.innerHTML = "Списък с присъстващи";
+    btn.id = "getFile";
+    document.getElementById("presentButton").appendChild(btn);
 
     document.getElementById("presentButton").style.visibility = "visible";
 
@@ -25,8 +25,6 @@ if (hasLectorRole) {
         }
         ajax_json("GET", "../php/get_present.php", { success: callback });
     })
-} else {
-    console.log("student");
 }
 
 function isLector() {
@@ -40,20 +38,20 @@ function isLector() {
     ajax_json("GET", "../php/is_lector.php", { success: callback });
 }
 
-document.getElementById('presentStudents').addEventListener('load', timer, false);
+// document.getElementById('presentStudents').addEventListener('load', timer, false);
 
-function timer() {
+// function timer() {
 
-    let timer = setInterval(function() {
-        printStudents();
-    }, 1000);
-}
+//     let timer = setInterval(function() {
+//         printStudents();
+//     }, 1000);
+// }
 
-window.onload = function() {
-    timer();
-}
+// window.onload = function() {
+//     timer();
+// }
 
-function printStudents() {
+export function printStudents() {
     let callback = function(data) {
         data = data.split("\n")
             .sort()

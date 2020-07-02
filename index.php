@@ -8,7 +8,7 @@ session_start();
     <meta http-equiv="content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
     <title>Презентиране на реферати</title>
-    <link href="../css/login.css" rel="stylesheet" />
+    <link href="./css/login.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -18,7 +18,7 @@ session_start();
 
     <div class="container">
         <main>
-            <form action="../php/loginRegister.php" class="informationForm" method="POST" enctype="multipart/form-data">
+            <form action="./php/loginRegister.php" class="informationForm" method="POST" enctype="multipart/form-data">
                 <h2>Вход</h2>
                 <?php
                 if (isset($_SESSION['errorMessage'])) {

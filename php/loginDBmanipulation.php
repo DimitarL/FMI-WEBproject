@@ -41,7 +41,7 @@ function checkData()
             if (password_verify($password, $hash['password'])) {
                 $_SESSION["role"] = "admin";
                 $_SESSION["username"] = $username;
-                header("location: ../html/welcome.html");
+                header("location: calendar.php");
             } else {
                 $_SESSION['errorMessage'] = 1;
                 die(header("location: loginStart.php"));
