@@ -10,6 +10,7 @@ function timer() {
 }
 
 window.onload = function() {
+    addUsernameToPresentTable();
     timer();
 }
 
@@ -23,4 +24,34 @@ function showPresentation() {
         }
     }
     ajax_json("GET", "../php/presentation.php", { success: callback });
+}
+
+function addUsernameToPresentTable() {
+    let callback = function(data) {
+        if (data != "1") {
+            alert(data);
+        }
+    }
+    ajax_json("POST", "../php/present_manipulation.php", { success: callback });
+}
+
+function deleteUsernameFromPresentTable(link) {
+    console.log("deleteUsernameFromPresentTable");
+    let callback = function(data) {
+        console.log(data + " data");
+        if (data != "1") {
+            alert(data);
+        }
+    }
+    ajax_json("DELETE", "../php/present_manipulation.php", { success: callback });
+}
+
+function goToCalendar() {
+    let redirect = "../php/calendar.php";
+    deleteUsernameFromPresentTable(redirect);
+}
+
+function goToLogIn() {
+    let redirect = "../php/loginStart.php";
+    deleteUsernameFromPresentTable(redirect);
 }

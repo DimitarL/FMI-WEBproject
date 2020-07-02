@@ -92,4 +92,37 @@ function getFullName($username){
     }  
 }
 
+function addPresent($username){
+    try {
+        $connection = dbConnection();
+        $sql = "INSERT IGNORE INTO  present(username) VALUES(:username);";
+        $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
+        $preparedSql->bindParam(':username', $username);
+        $preparedSql->execute() or die("Failed to execute sql query."); 
+        $connection = null;  
+        return true;
+   }
+    catch(PDOException $error) {
+        echo ("Request processing failed.");
+        return false;
+    }  
+}
+
+function deletePresent($username){
+    try {
+        $connection = dbConnection();
+        $sql = "DELETE FROM present WHERE username = :username;";
+        $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
+        $preparedSql->bindParam(':username', $username);
+        $preparedSql->execute() or die("Failed to execute sql query."); 
+        $connection = null;  
+        return true;
+   }
+    catch(PDOException $error) {
+        echo ("Request processing failed.");
+        return false;
+    }  
+}
+
+
 ?>
