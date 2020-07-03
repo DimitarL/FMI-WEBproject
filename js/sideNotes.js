@@ -4,7 +4,7 @@
 //   }, 1000);
 // }
 
-document.getElementById('downloadNotes').addEventListener("click", downloadFunction);
+document.getElementById('saveNotes').addEventListener("click", downloadFunction);
 document.getElementById('saveNotes').addEventListener("click", submitFunction);
 
 export function printContent() {
