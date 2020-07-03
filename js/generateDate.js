@@ -107,7 +107,6 @@ function validate() {
 
         let callback = function(msg) {
             if (msg == "1") {
-                console.log("Dates are generated.");
                 window.location = '../php/calendar.php';
             } else {
                 document.getElementById('error').innerText = msg;

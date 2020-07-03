@@ -2,3 +2,4 @@
 include "dbSharedNotesManipulation.php";
 
 downloadNotes();
+?>

@@ -23,12 +23,7 @@ document.getElementById('submitButton').addEventListener('click', () => {
     addPresentation();
 })
 
-// document.getElementById('cancelButton').addEventListener('click', () => {
-//     // window.location.href = '../calendar.html';
-// })
-
 function addPresentation() {
-    // let username = 'asimeonov';
 
     const topicId = 'topic';
     const dateId = 'date';
@@ -47,7 +42,6 @@ function addPresentation() {
         }
 
         let formData = new FormData();
-        // formData.append('username', username);
         formData.append('topic', document.getElementById(topicId).value);
         formData.append('file', file);
 
@@ -60,8 +54,6 @@ function addPresentation() {
 
             let data = { topic, presentation, invitation, timeDate };
             insertPresentationData(data);
-        } else {
-            console.log("UPLOAD FILE IN: " + uploadFile);
         }
     }
 
@@ -72,14 +64,12 @@ function downloadImage(data) {
     const urlScript = "../php/image_download.php";
 
     let callback = function(msg) {
-        console.log(msg);
         let regex = /\/uploads\//;
         if (regex.test(msg)) {
             uploadFile = msg;
         } else {
             document.getElementById(errorId).innerText = msg;
         }
-        console.log("UPLOAD FILE: " + uploadFile);
     }
 
     ajax(urlScript, { success: callback }, data);
@@ -94,7 +84,6 @@ function insertPresentationData(data) {
     const urlScript = "../php/insert_presentation.php";
     let callback = function(msg) {
         if (msg == "1") {
-            console.log("The presentation data is saved.");
             window.location = '../php/calendar.php';
         } else {
             document.getElementById(errorId).innerText = msg;
