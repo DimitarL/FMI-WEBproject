@@ -69,3 +69,4 @@ function insertDateSlots($date, $end, $durationPresentation)
         return false;
     }
 }
+?>

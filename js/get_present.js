@@ -38,19 +38,6 @@ function isLector() {
     ajax_json("GET", "../php/is_lector.php", { success: callback });
 }
 
-// document.getElementById('presentStudents').addEventListener('load', timer, false);
-
-// function timer() {
-
-//     let timer = setInterval(function() {
-//         printStudents();
-//     }, 1000);
-// }
-
-// window.onload = function() {
-//     timer();
-// }
-
 export function printStudents() {
     let callback = function(data) {
         data = data.split("\n")

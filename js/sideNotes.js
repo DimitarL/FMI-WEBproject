@@ -1,9 +1,3 @@
-// function timer() {
-//   let timer = setInterval(function () {
-//     printFunction();
-//   }, 1000);
-// }
-
 document.getElementById('saveNotes').addEventListener("click", submitFunction);
 document.getElementById('saveNotes').addEventListener("click", downloadFunction);
 

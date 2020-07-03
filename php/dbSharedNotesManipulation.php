@@ -72,3 +72,4 @@ function downloadNotes()
         echo $error->getMessage();
     }
 }
+?>
