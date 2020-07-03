@@ -1,5 +1,7 @@
-document.getElementById('saveNotes').addEventListener("click", submitFunction);
-document.getElementById('saveNotes').addEventListener("click", downloadFunction);
+document.getElementById('saveNotes').addEventListener("click", function() {
+    submitFunction();
+    downloadFunction();
+});
 
 export function printContent() {
     var xhttp = new XMLHttpRequest();
