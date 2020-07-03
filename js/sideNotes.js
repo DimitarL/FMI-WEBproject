@@ -4,8 +4,8 @@
 //   }, 1000);
 // }
 
-document.getElementById('saveNotes').addEventListener("click", downloadFunction);
 document.getElementById('saveNotes').addEventListener("click", submitFunction);
+document.getElementById('saveNotes').addEventListener("click", downloadFunction);
 
 export function printContent() {
     var xhttp = new XMLHttpRequest();
