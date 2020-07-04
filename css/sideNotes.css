@@ -43,6 +43,7 @@ html {
     margin-bottom: 10px;
     margin-top: 10px;
     background-color: white;
+    padding-left: 2px;
 }
 
 .notesTitle {
@@ -55,4 +56,15 @@ html {
     display: inline;
     font-weight: bold;
     margin-left: 5px;
+}
+
+.sessionUN {
+    display: inline;
+    color: #e60576;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.colon {
+    font-size: 18px;
 }
