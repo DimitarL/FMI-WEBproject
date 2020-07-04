@@ -9,8 +9,7 @@
 </head>
 
 <body>
-    <?php
-    session_start(); ?>
+    <?php session_start(); ?>
     <header class="header">
         <h2> Календар за презентиране</h2>
         <a href='../php/logout.php'><button> Изход </button></a>
@@ -20,27 +19,48 @@
         <table>
             <thead>
                 <tr>
+                    <th>Ден</th>
                     <th>Дата на представяне</th>
+                    <th>Зала</th>
                     <th>Лично име</th>
                     <th>Фамилия</th>
+                    <th>Факултетен номер</th>
                     <th>Курс</th>
-                    <th>Група</th>
-                    <th>Презентация</th>
+                    <th>Видеоконферентна връзка</th>
                     <th>Тема</th>
                     <th>Покана</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
+                $counter = 0;
                 include './db_connection.php';
                 $conn = dbConnection();
-                $sql = "SELECT d.timeDate, s.firstName, s.lastName, s.course, s.groupNumber, p.presentation, p.invitation, p.topic FROM presentations p INNER JOIN students s on p.username=s.username LEFT JOIN dates d on d.timeDate=p.timeDate  ORDER BY p.timeDate";
+                $sql = "SELECT d.timeDate, d.room, s.firstName, s.lastName, s.facultyNumber, s.course, p.presentation, p.invitation, p.topic FROM presentations p INNER JOIN students s on p.username=s.username LEFT JOIN dates d on d.timeDate=p.timeDate  ORDER BY d.timeDate";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute() or die("Failed to query from DB!");
                 while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                     <tr>
                         <td>
-                            <?php echo $result["timeDate"] ?>
+                            <?php if ($counter == 0) {
+                                $datePresentation = $result["timeDate"];
+                                $counter++;
+                            } else {
+                                $splitDateBefore = explode(" ", $datePresentation);
+                                $splitDateAfter = explode(" ", $result["timeDate"]);
+                                if (strcmp($splitDateBefore[0], $splitDateAfter[0])) {
+                                    $counter++;
+                                    $datePresentation = $result["timeDate"];
+                                }
+                            }
+                            echo "Ден " . $counter; ?>
+                        </td>
+                        <td>
+                            <?php
+                            echo $result["timeDate"]; ?>
+                        </td>
+                        <td>
+                            <?php echo $result["room"]; ?>
                         </td>
                         <td>
                             <?php echo $result["firstName"] ?>
@@ -49,10 +69,10 @@
                             <?php echo $result["lastName"] ?>
                         </td>
                         <td>
-                            <?php echo $result["course"] ?>
+                            <?php echo $result["facultyNumber"] ?>
                         </td>
                         <td>
-                            <?php echo $result["groupNumber"] ?>
+                            <?php echo $result["course"] ?>
                         </td>
                         <td>
                             <?php echo $result["presentation"] ?>
@@ -68,49 +88,53 @@
                     </tr>
                 <?php
                 }
-                $sql = "SELECT timeDate from dates where hasPresentation='0'";
+                $sql = "SELECT timeDate, room from dates where hasPresentation='0'";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute() or die("Failed to query from DB!");
+                $counter = 0;
                 while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                     <tr>
+                        <td>
+                            <?php if ($counter == 0) {
+                                $datePresentation = $result["timeDate"];
+                                $counter++;
+                            } else {
+                                $splitDateBefore = explode(" ", $datePresentation);
+                                $splitDateAfter = explode(" ", $result["timeDate"]);
+                                if (strcmp($splitDateBefore[0], $splitDateAfter[0])) {
+                                    $counter++;
+                                    $datePresentation = $result["timeDate"];
+                                }
+                            }
+                            echo "Ден " . $counter; ?>
+                        </td>
                         <td>
                             <?php echo $result["timeDate"] ?>
                         </td>
                         <td>
-                            <?php echo "" ?>
+                            <?php echo $result["room"] ?>
                         </td>
-                        <td>
-                            <?php echo "" ?>
-                        </td>
-                        <td>
-                            <?php echo "" ?>
-                        </td>
-                        <td>
-                            <?php echo "" ?>
-                        </td>
-                        <td>
-                            <?php echo "" ?>
-                        </td>
-                        <td>
-                            <?php echo "" ?>
-                        </td>
-                        <td>
-                            <?php echo "" ?>
-                        </td>
-                    <?php
-                }
-                    ?>
-
+                        <?php for ($i = 0; $i < 7; $i++) { ?>
+                            <td>
+                                <?php echo "" ?>
+                            </td>
+                    <?php }
+                    } ?>
             </tbody>
         </table>
         <div class="edit">
-
             <?php
-            if (strcmp($_SESSION["role"], "admin") == 0) {
-            ?>
+            $user = $_SESSION["username"];
+            $sql = "SELECT count(username) from presentations where username=:usernamePlaceholder";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":usernamePlaceholder", $user);
+            $stmt->execute() or die("Failed to query from DB!");
+            if ($stmt->fetchColumn() != 0) { ?>
+                    <input type="submit" value="Отпиши се" name="removeFromTable" id="removeFromTable">
+                <?php
+            } else if (strcmp($_SESSION["role"], "admin") == 0) { ?>
                 <input type="submit" value="Генерирай часове" onclick="window.location='../html/generateDate.html'">
-            <?php } else if (strcmp($_SESSION["role"], "student") == 0) {
-            ?>
+            <?php } else if (strcmp($_SESSION["role"], "student") == 0) { ?>
                 <input type="submit" value="Запиши се!" onclick="window.location='../html/presentation_record.html'">
             <?php } ?>
             <input type="submit" value="Към презентацията" onclick="window.location='../html/presentation.html'">

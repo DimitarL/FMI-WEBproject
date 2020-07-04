@@ -7,6 +7,7 @@ $date = $input->date;
 $startHour =  $input->start;
 $endHour =  $input->end;
 $durationPresentation =  $input->duration;
+$room = $input->room;
 $interval = " ";
 $startDate = $date . $interval . $startHour;
 $endDate = $date . $interval . $endHour;
@@ -29,7 +30,7 @@ function getCountBetweenTwoDates($startDate, $endDate)
     }
 }
 
-function createPresentationSlots($duration, $start, $end, $date)
+function createPresentationSlots($duration, $start, $end, $date, $room)
 {
     $count = getCountBetweenTwoDates($start, $end);
     $hours = 0;
@@ -38,7 +39,7 @@ function createPresentationSlots($duration, $start, $end, $date)
         $end_time = $end;
         while (strtotime('+' . $duration . ' minutes', strtotime($start_time)) <= strtotime($end_time)) {
             $end = date('Y-m-d H:i', strtotime('+' . $duration . ' minutes', strtotime($start_time)));
-            insertDateSlots($start_time,$end, $duration);
+            insertDateSlots($start_time, $end, $duration, $room);
             $start_time = $end;
             $hours++;
         }
@@ -51,17 +52,18 @@ function createPresentationSlots($duration, $start, $end, $date)
         echo "Вече сте генерирали часове за този времеви интервал! Моля генерирайте пак!";
     }
 }
-$result = createPresentationSlots($durationPresentation, $startDate, $endDate, $date, $endHour);
+$result = createPresentationSlots($durationPresentation, $startDate, $endDate, $date, $room);
 echo $result;
-function insertDateSlots($date, $end, $durationPresentation)
+function insertDateSlots($date, $end, $durationPresentation, $room)
 {
     try {
         $conn = dbConnection();
-        $sql = "INSERT INTO dates (timeDate, timeEnd, duration) values (:datePlaceholder, :timeEndPlaceholder, :durationPlaceholder);";
+        $sql = "INSERT INTO dates (timeDate, timeEnd, duration, room) values (:datePlaceholder, :timeEndPlaceholder, :durationPlaceholder, :roomPlaceholder);";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":datePlaceholder", $date);
         $stmt->bindParam(":timeEndPlaceholder", $end);
         $stmt->bindParam(":durationPlaceholder", $durationPresentation);
+        $stmt->bindParam(":roomPlaceholder", $room);
         $stmt->execute() or die("Failed!");
         $conn = null;
     } catch (PDOException $error) {
@@ -69,4 +71,3 @@ function insertDateSlots($date, $end, $durationPresentation)
         return false;
     }
 }
-?>

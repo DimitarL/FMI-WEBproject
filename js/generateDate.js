@@ -102,8 +102,10 @@ function validate() {
         let start = document.getElementById('start').value;
         let end = document.getElementById('end').value;
         let duration = document.getElementById('duration').value;
+        let room = document.getElementById('room').value;
 
-        let json = { date, start, end, duration };
+
+        let json = { date, start, end, duration, room };
 
         let callback = function(msg) {
             if (msg == "1") {
