@@ -30,3 +30,4 @@ function validatePassword($input, &$errors)
         $errors['$input'] = "Въведената парола има невалидни символи!" . "<br>";
     }
 }
+?>

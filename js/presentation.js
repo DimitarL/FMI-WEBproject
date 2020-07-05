@@ -2,8 +2,6 @@ import { ajax_json } from './ajax.js';
 import { printStudents } from './get_present.js';
 import { printContent } from './sideNotes.js';
 
-// document.getElementById('showPresentation').addEventListener('load', timer, false);
-
 document.getElementById('goToCalendar').addEventListener('click', goToCalendar);
 document.getElementById('goToLogIn').addEventListener("click", goToLogIn);
 
