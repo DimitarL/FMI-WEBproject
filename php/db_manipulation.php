@@ -92,12 +92,13 @@ function getFullName($username){
     }  
 }
 
-function addPresent($username){
+function addPresent($username, $topicId){
     try {
         $connection = dbConnection();
-        $sql = "INSERT IGNORE INTO  present(username) VALUES(:username);";
+        $sql = "INSERT IGNORE INTO  present(username, topicId) VALUES(:username, :topicId);";
         $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
         $preparedSql->bindParam(':username', $username);
+        $preparedSql->bindParam(':topicId', $topicId);
         $preparedSql->execute() or die("Failed to execute sql query."); 
         $connection = null;  
         return true;

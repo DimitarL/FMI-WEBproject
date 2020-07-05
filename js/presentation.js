@@ -5,6 +5,7 @@ import { printContent } from './sideNotes.js';
 document.getElementById('goToCalendar').addEventListener('click', goToCalendar);
 document.getElementById('goToLogIn').addEventListener("click", goToLogIn);
 
+// let topicId;
 
 function customTimer() {
     let timer = setInterval(function() {
@@ -14,18 +15,33 @@ function customTimer() {
     }, 1000);
 }
 
-window.onload = function() {
-    addUsernameToPresentTable();
+window.addEventListener("load", function() {
     customTimer();
-}
+
+    setTimeout(function() {
+        addUsernameToPresentTable();
+    }, 1000);
+
+    // waitForEl(document.getElementById("topicId"), function() {
+    //     addUsernameToPresentTable();
+    // });
+}, false);
+
+// window.onload = function() {
+//     customTimer();
+// addUsernameToPresentTable();
+// }
 
 function showPresentation() {
     let callback = function(data) {
         if (data == "") {
             document.getElementById('currentPresentation').innerHTML = "В момента няма презентиращи";
-
         } else {
-            document.getElementById('currentPresentation').innerHTML = '<a href="' + data + '"target="_blank">Линк</a>';
+            data = JSON.parse(data);
+            document.getElementById("topicId").innerText = data['topicId'];
+            document.getElementById("topicTitle").innerText = data['topic'];
+            document.getElementById('currentPresentation').innerHTML = '<a href="' + data['presentationLink'] + '"target="_blank">Линк</a>';
+            // topicId = data['topic'];
         }
     }
     ajax_json("GET", "../php/presentation.php", { success: callback });
@@ -37,7 +53,9 @@ function addUsernameToPresentTable() {
             alert(data);
         }
     }
-    ajax_json("POST", "../php/present_manipulation.php", { success: callback });
+    let topicId = document.getElementById("topicId").innerText;
+    console.log("TOPIC ID: " + topicId);
+    ajax_json("POST", "../php/present_manipulation.php", { success: callback }, JSON.stringify(topicId));
 }
 
 function deleteUsernameFromPresentTable(link) {
@@ -60,3 +78,11 @@ function goToLogIn() {
     let redirect = "../index.php";
     deleteUsernameFromPresentTable(redirect);
 }
+
+let waitForEl = function(selector, callback) {
+    if (selector.innerHTML) {
+        callback();
+    } else {
+        waitForEl(selector, callback);
+    }
+};

@@ -14,6 +14,7 @@ if (hasLectorRole) {
 
     document.getElementById('getFile').addEventListener('click', function() {
         let callback = function(data) {
+            // console.log(data);
             let a = document.createElement('a');
             let url = window.URL.createObjectURL(new Blob([data]));
             a.href = url;
