@@ -103,9 +103,9 @@ function validate() {
         let end = document.getElementById('end').value;
         let duration = document.getElementById('duration').value;
         let room = document.getElementById('room').value;
+        let day = document.getElementById('day').value;
 
-
-        let json = { date, start, end, duration, room };
+        let json = { date, start, end, duration, room, day };
 
         let callback = function(msg) {
             if (msg == "1") {
