@@ -69,7 +69,7 @@ function downloadNotes()
 
         $result = $connection->prepare($sql) or die("Failed to prepare select sql query.");
         $result->execute() or die("Failed to execute select sql query.");
-        $fileOpen = fopen('downloaded_Notes.txt', 'w');
+        $fileOpen = fopen('../downloaded_Notes.txt', 'w');
 
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             fputs($fileOpen, $counter . ". " . $row['inputNotes'] . "\n");
