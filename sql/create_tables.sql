@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS presentations (
     topicId INT,
     username VARCHAR(64),
     timeDate timestamp NULL,
+    presentationLink VARCHAR(128) NOT NULL,
     CONSTRAINT fkDate FOREIGN KEY (timeDate)
     REFERENCES dates(timeDate) ON UPDATE CASCADE,
     CONSTRAINT fkStudent FOREIGN KEY (username)
