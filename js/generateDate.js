@@ -78,6 +78,15 @@ function validateDuration() {
     return true;
 }
 
+function validateDay() {
+    if (document.getElementById("day").value < 1) {
+        document.getElementById("day").style.backgroundColor = '#fba';
+        document.getElementById("error").innerText = "Денят трябва да е положително число";
+        return false;
+    }
+    return true;
+}
+
 function validate() {
     var start = document.getElementById("start");
     var end = document.getElementById("end");
@@ -97,7 +106,7 @@ function validate() {
         end.style.backgroundColor = '#fba';
     }
 
-    if (isValidStart && isValidEnd && validateDuration() && compare(start.value, end.value) && compareCurrentDateTime(document.getElementById("date").value, start.value)) {
+    if (isValidStart && isValidEnd && validateDuration() && validateDay() && compare(start.value, end.value) && compareCurrentDateTime(document.getElementById("date").value, start.value)) {
         let date = document.getElementById('date').value;
         let start = document.getElementById('start').value;
         let end = document.getElementById('end').value;
