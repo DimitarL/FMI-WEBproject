@@ -32,11 +32,39 @@ function getCountBetweenTwoDates($startDate, $endDate)
     }
 }
 
+function getDay (){
+    try {
+        $conn = dbConnection();
+        $sql = "SELECT max(day) FROM dates";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute() or die("Failed to query from DB!");
+        return $stmt->fetchColumn();
+        $conn = null;
+    } catch (PDOException $error) {
+        echo ("Проблем със свързването с базата.Моля опитайте пак по-късно.");
+        return false;
+    }
+}
+function getLastDate (){
+    try {
+        $conn = dbConnection();
+        $sql = "SELECT max(timeDate) FROM dates";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute() or die("Failed to query from DB!");
+        return $stmt->fetchColumn();
+        $conn = null;
+    } catch (PDOException $error) {
+        echo ("Проблем със свързването с базата.Моля опитайте пак по-късно.");
+        return false;
+    }
+}
 function createPresentationSlots($duration, $start, $end, $date, $room, $day)
 {
     $count = getCountBetweenTwoDates($start, $end);
     $hours = 0;
-    if ($count == 0) {
+    $maxDay=getDay();
+    $lastdate=getLastDate();
+    if ($count == 0 && $maxDay<$day ) {
         $start_time = $start;
         $end_time = $end;
         while (strtotime('+' . $duration . ' minutes', strtotime($start_time)) <= strtotime($end_time)) {
@@ -50,7 +78,9 @@ function createPresentationSlots($duration, $start, $end, $date, $room, $day)
         } else {
             return true;
         }
-    } else {
+    } else if( $maxDay>=$day){
+        echo "Последният генериран ден е Ден $maxDay на дата $lastdate.";
+    }else {
         echo "Вече сте генерирали часове за този времеви интервал! Моля генерирайте пак!";
     }
 }
