@@ -62,21 +62,21 @@ VALUES ('Мартина', 'Минева', 'mamineva', '$2y$10$okneBzAVTXaiUA/Bqq
 
 -- TOPICS
 INSERT INTO topicsInfo(topicId, topic, presentationPath, invitationPath)
-VALUES ( 1 , 'Google - Web Performance Best Practices', '../uploads/presentations/78412_presentation.pptx', '../uploads/invitations/78412_invitations.png'),
-( 2 , 'HTML5 - част 1 семантични тагове, тагове за форми. Примери.', '../uploads/presentations/78416_presentation.pptx', '../uploads/invitations/78416_invitations.png'),
-( 3 , 'Latex - сравнение с HTML', '../uploads/presentations/78417_presentation.pptx', '../uploads/invitations/78417_invitations.png'),
-( 4 , 'CSS: стилове, класове, селектори', '../uploads/presentations/78419_presentation.pptx', '../uploads/invitations/78419_invitations.png'),
-( 5 , 'CSS: layouts, box model', '../uploads/presentations/78502_presentation.pptx', '../uploads/invitations/78502_invitations.png'),
-( 6 , 'CSS: layouts, flexbox', '../uploads/presentations/78423_presentation.pptx', '../uploads/invitations/78423_invitations.png'),
-( 7 , 'Анимации с CSS с използване на трансформации', '../uploads/presentations/78432_presentation.pptx', '../uploads/invitations/78432_invitations.png'),
-( 8 , 'Еммет синтаксис', '../uploads/presentations/78433_presentation.pptx', '../uploads/invitations/78433_invitations.png'),
-( 9 , 'DOM дърво, обхождане и манипулация', '../uploads/presentations/78464_presentation.pptx', '../uploads/invitations/78464_invitations.png'),
-( 10 , 'Работа със сесии и cookies (от страна насървъра и клиента). Local Storage API', '../uploads/presentations/78468_presentation.pptx', '../uploads/invitations/78468_invitations.png'),
-( 11 , 'HTML мета-тагове и SEO', '../uploads/presentations/78481_presentation.pptx', '../uploads/invitations/78481_invitations.png'),
-( 12 , 'Протокол HTTP версия 2.0+', '../uploads/presentations/78482_presentation.pptx', '../uploads/invitations/78482_invitations.png'),
-( 13 , 'CSS Preprocessor/LESS и SASS', '../uploads/presentations/78489_presentation.pptx', '../uploads/invitations/78489_invitations.png'),
-( 14 , 'External Data Representation (XDR)', '../uploads/presentations/78490_presentation.pptx', '../uploads/invitations/78490_invitations.png'),
-( 15 , 'Svelte web tool', '../uploads/presentations/78497_presentation.pptx', '../uploads/invitations/78497_invitations.png');
+VALUES ( 1 , 'Google - Web Performance Best Practices', '78412_presentation.pptx', '78412_invitations.png'),
+( 2 , 'HTML5 - част 1 семантични тагове, тагове за форми. Примери.', '78416_presentation.pptx', '78416_invitations.png'),
+( 3 , 'Latex - сравнение с HTML', '78417_presentation.pptx', '78417_invitations.png'),
+( 4 , 'CSS: стилове, класове, селектори', '78419_presentation.pptx', '78419_invitations.png'),
+( 5 , 'CSS: layouts, box model', '78502_presentation.pptx', '78502_invitations.png'),
+( 6 , 'CSS: layouts, flexbox', '78423_presentation.pptx', '78423_invitations.png'),
+( 7 , 'Анимации с CSS с използване на трансформации', '78432_presentation.pptx', '78432_invitations.png'),
+( 8 , 'Еммет синтаксис', '78433_presentation.pptx', '78433_invitations.png'),
+( 9 , 'DOM дърво, обхождане и манипулация', '78464_presentation.pptx', '78464_invitations.png'),
+( 10 , 'Работа със сесии и cookies (от страна насървъра и клиента). Local Storage API', '78468_presentation.pptx', '78468_invitations.png'),
+( 11 , 'HTML мета-тагове и SEO', '78481_presentation.pptx', '78481_invitations.png'),
+( 12 , 'Протокол HTTP версия 2.0+', '78482_presentation.pptx', '78482_invitations.png'),
+( 13 , 'CSS Preprocessor/LESS и SASS', '78489_presentation.pptx', '78489_invitations.png'),
+( 14 , 'External Data Representation (XDR)', '78490_presentation.pptx', '78490_invitations.png'),
+( 15 , 'Svelte web tool', '78497_presentation.pptx', '78497_invitations.png');
 
 -- PRESENTATIONS
 INSERT INTO presentations(username, topicId)

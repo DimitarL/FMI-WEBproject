@@ -8,12 +8,22 @@ function getPresentation($date)
 {
     try {
         $conn = dbConnection();
-        $sql = "SELECT p.presentation FROM presentations p, dates d where p.timeDate=d.timeDate and :datePlaceholder between d.timeDate and d.timeEnd ";
+
+        $sql = "SELECT p.presentationLink, t.topicId, t.topic 
+        FROM presentations AS p
+        INNER JOIN dates AS d
+        ON p.timeDate = d.timeDate
+        INNER JOIN topicsinfo AS t
+        ON p.topicId = t.topicId
+        WHERE :datePlaceholder between d.timeDate and d.timeEnd;";
+        
         $stmt = $conn->prepare($sql);
+        // $date = "2020-07-05 17:16:00";
         $stmt->bindParam(":datePlaceholder", $date);
         $stmt->execute() or die("Failed to query from DB!");
-        echo $stmt->fetchColumn();
         $conn = null;
+        
+        echo(json_encode($stmt->fetch(PDO::FETCH_ASSOC)));
     } catch (PDOException $error) {
         echo ("Проблем със свързването с базата.Моля опитайте пак по-късно.");
         return false;

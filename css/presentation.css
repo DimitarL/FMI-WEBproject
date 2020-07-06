@@ -29,3 +29,14 @@
     margin-top: 30px;
     text-align: center;
 }
+
+.presentButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.presentButton button {
+    margin-top: 10px;
+}
