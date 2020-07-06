@@ -70,7 +70,7 @@ function getMinutes(d) {
 }
 
 function validateDuration() {
-    if (document.getElementById("duration").value < 3 || document.getElementById("duration").value > 10) {
+    if (document.getElementById("duration").value < 3 || document.getElementById("duration").value > 180) {
         document.getElementById("duration").style.backgroundColor = '#fba';
         document.getElementById("error").innerText = "Продължителността е от 3 до 10 минути.";
         return false;
@@ -102,8 +102,10 @@ function validate() {
         let start = document.getElementById('start').value;
         let end = document.getElementById('end').value;
         let duration = document.getElementById('duration').value;
+        let room = document.getElementById('room').value;
+        let day = document.getElementById('day').value;
 
-        let json = { date, start, end, duration };
+        let json = { date, start, end, duration, room, day };
 
         let callback = function(msg) {
             if (msg == "1") {
