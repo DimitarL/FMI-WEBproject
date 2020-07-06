@@ -26,7 +26,8 @@
                     <th>Лично име</th>
                     <th>Фамилия</th>
                     <th>Факултетен номер</th>
-                    <th>Покана</th>
+                    <th>Курс</th>
+                    <th>Група</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,7 +35,7 @@
                 $counter = 0;
                 include './db_connection.php';
                 $conn = dbConnection();
-                $sql = "SELECT d.day, d.timeDate, d.room, t.topic, s.firstName, s.lastName, s.facultyNumber, t.invitationPath from dates d 
+                $sql = "SELECT d.day, d.timeDate, d.room, t.topic, s.firstName, s.lastName, s.facultyNumber, s.course, s.groupNumber from dates d 
                 inner join presentations p on d.timedate=p.timeDate inner join topicsInfo t on p.topicId=t.topicId inner join students s on p.username=s.username where d.hasPresentation='1'";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute() or die("Failed to query from DB!");
@@ -62,7 +63,10 @@
                             <?php echo $result["facultyNumber"] ?>
                         </td>
                         <td>
-                            <?php echo $result["invitationPath"] ?>
+                            <?php echo $result["course"] ?>
+                        </td>
+                        <td>
+                            <?php echo $result["groupNumber"] ?>
                         </td>
                     </tr>
                 <?php
@@ -83,7 +87,7 @@
                         <td>
                             <?php echo $result["room"]; ?>
                         </td>
-                        <?php for ($i = 0; $i < 5; $i++) { ?>
+                        <?php for ($i = 0; $i < 6; $i++) { ?>
                             <td>
                                 <?php echo "" ?>
                             </td>
@@ -96,12 +100,12 @@
         <div class="edit">
             <?php
             $user = $_SESSION["username"];
-            $sql = "SELECT count(username) from presentations where username=:usernamePlaceholder";
+            $sql = "SELECT count(username) from presentations inner join dates on presentations.timeDate=dates.timeDate where username=:usernamePlaceholder";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(":usernamePlaceholder", $user);
             $stmt->execute() or die("Failed to query from DB!");
             if ($stmt->fetchColumn() != 0) { ?>
-                <input type="submit" value="Отпиши се" name="removeFromTable" id="removeFromTable">
+                <input type="submit" value="Отпиши се" name="removeFromTable" id="removeFromTable" onclick="window.location='../php/updateCalendar.php'">
             <?php
             } else if (strcmp($_SESSION["role"], "admin") == 0) { ?>
                 <input type="submit" value="Генерирай часове" onclick="window.location='../html/generateDate.html'">
