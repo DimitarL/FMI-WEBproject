@@ -19,12 +19,9 @@ window.addEventListener("load", function() {
     customTimer();
 
     setTimeout(function() {
-        addUsernameToPresentTable();
+        addToPresentTable();
     }, 1000);
 
-    // waitForEl(document.getElementById("topicId"), function() {
-    //     addUsernameToPresentTable();
-    // });
 }, false);
 
 // window.onload = function() {
@@ -41,48 +38,47 @@ function showPresentation() {
             document.getElementById("topicId").innerText = data['topicId'];
             document.getElementById("topicTitle").innerText = data['topic'];
             document.getElementById('currentPresentation').innerHTML = '<a href="' + data['presentationLink'] + '"target="_blank">Линк</a>';
-            // topicId = data['topic'];
         }
     }
     ajax_json("GET", "../php/presentation.php", { success: callback });
 }
 
-function addUsernameToPresentTable() {
+function addToPresentTable() {
     let callback = function(data) {
-        if (data != "1") {
+        if (data != "1" && data != "") {
             alert(data);
         }
     }
-    let topicId = document.getElementById("topicId").innerText;
-    console.log("TOPIC ID: " + topicId);
+    let topicId = parseInt(document.getElementById("topicId").innerText);
     ajax_json("POST", "../php/present_manipulation.php", { success: callback }, JSON.stringify(topicId));
 }
 
-function deleteUsernameFromPresentTable(link) {
+function updatePresentTable(link) {
     let callback = function(data) {
         if (data != "1") {
+            console.log("UPDATE PRESENT TABLE");
             alert(data);
         } else {
             window.location = link;
         }
     }
-    ajax_json("DELETE", "../php/present_manipulation.php", { success: callback });
+    ajax_json("PUT", "../php/present_manipulation.php", { success: callback });
 }
 
 function goToCalendar() {
     let redirect = "../php/calendar.php";
-    deleteUsernameFromPresentTable(redirect);
+    updatePresentTable(redirect);
 }
 
 function goToLogIn() {
     let redirect = "../index.php";
-    deleteUsernameFromPresentTable(redirect);
+    updatePresentTable(redirect);
 }
 
-let waitForEl = function(selector, callback) {
-    if (selector.innerHTML) {
-        callback();
-    } else {
-        waitForEl(selector, callback);
-    }
-};
+// let waitForEl = function(selector, callback) {
+//     if (selector.innerHTML) {
+//         callback();
+//     } else {
+//         waitForEl(selector, callback);
+//     }
+// };

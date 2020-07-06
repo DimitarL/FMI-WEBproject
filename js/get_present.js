@@ -6,7 +6,7 @@ isLector();
 
 if (hasLectorRole) {
     let btn = document.createElement("BUTTON");
-    btn.innerHTML = "Списък с присъстващи";
+    btn.innerHTML = "Списък с присъствали";
     btn.id = "getFile";
     document.getElementById("presentButton").appendChild(btn);
 
@@ -14,7 +14,27 @@ if (hasLectorRole) {
 
     document.getElementById('getFile').addEventListener('click', function() {
         let callback = function(data) {
-            // console.log(data);
+            console.log(data);
+            let a = document.createElement('a');
+            let url = window.URL.createObjectURL(new Blob([data]));
+            a.href = url;
+            a.download = 'presentAll.txt';
+            document.body.append(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        }
+        ajax_json("GET", "../php/download_all_present.php", { success: callback });
+    })
+
+    let btnPresent = document.createElement("BUTTON");
+    btnPresent.innerHTML = "Текущ списък с присъстващи";
+    btnPresent.id = "getFilePresent";
+    document.getElementById("presentButton").appendChild(btnPresent);
+
+    document.getElementById('getFilePresent').addEventListener('click', function() {
+        let callback = function(data) {
+            console.log(data);
             let a = document.createElement('a');
             let url = window.URL.createObjectURL(new Blob([data]));
             a.href = url;
@@ -24,7 +44,7 @@ if (hasLectorRole) {
             a.remove();
             window.URL.revokeObjectURL(url);
         }
-        ajax_json("GET", "../php/get_present.php", { success: callback });
+        ajax_json("GET", "../php/download_present.php", { success: callback });
     })
 }
 
@@ -50,5 +70,5 @@ export function printStudents() {
         }
         document.getElementById('students').innerHTML = data.join("\n");
     }
-    ajax_json("GET", "../php/get_present.php", { success: callback });
+    ajax_json("GET", "../php/present_manipulation.php", { success: callback });
 }
