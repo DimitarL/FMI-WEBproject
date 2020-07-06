@@ -21,23 +21,19 @@
         <h3> Записване за презентиране</h3>
         <form method="POST" enctype="multipart/form-data">
             <div class="field">
-                <label for="date">Дата:</label>
+                <label for="session">Сесия(Ден):</label>
+                <select id="session" name="session">
+                </select>
+            </div>
+            <div class="field">
+                <label for="date">Час:</label>
                 <select id="date" name="date">
                 </select>
             </div>
             <div class="field">
-                <label for="topic">Тема:</label>
-                <input type="text" name="topic" id="topic" placeholder="Въведете тема" required/>
+                <label for="presentationLink">Презентация (линк):</label>
+                <input type="text" name="presentationLink" id="presentationLink" placeholder="Въведете линк" required/>
             </div>
-            <div class="field">
-                <label for="presentation">Презентация (линк):</label>
-                <input type="text" name="presentation" id="presentation" placeholder="Въведете линк" required/>
-            </div>
-            <div class="field">
-                <label for="invitation">Покана:</label>
-                <input type="file" name="invitation" id="invitation" accept=".jpg, .jpeg, .png, .gif" required/>
-            </div>
-
             <div class="msg">
                 <p id="error"> </p>
             </div>
