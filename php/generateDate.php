@@ -78,7 +78,7 @@ function createPresentationSlots($duration, $start, $end, $date, $room, $day)
         } else {
             return true;
         }
-    } else if( $maxDay>=$day){
+    } else if( $maxDay>=$day || $lastdate>$start){
         echo "Последният генериран ден е Ден $maxDay на дата $lastdate.";
     }else {
         echo "Вече сте генерирали часове за този времеви интервал! Моля генерирайте пак!";
