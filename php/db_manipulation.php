@@ -4,14 +4,13 @@ include "./db_connection.php";
 
 date_default_timezone_set('Europe/Sofia');
 
-function getFreeDates(){
+function getFreeDates($session){
     try {
-
         $connection = dbConnection();
-        $sql = "SELECT * FROM dates WHERE hasPresentation = false";
+        $sql = "SELECT * FROM dates WHERE hasPresentation = false AND day = :sessionDay";
 
         $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
-        
+        $preparedSql->bindParam(':sessionDay', $session);
         $preparedSql->execute() or die("Неуспешно се заредиха свободните дати."); 
         $connection = null;  
         return $preparedSql->fetchAll();
@@ -21,18 +20,32 @@ function getFreeDates(){
     }
 }
 
-function insertPresentation($username, $topic, $presentation, $invitation, $timeDate){
+
+function getAllSessions(){
+    try {
+        $connection = dbConnection();
+        $sql = "SELECT DISTINCT day FROM dates WHERE hasPresentation = false";
+        $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
+        $preparedSql->execute() or die("Неуспешно се заредиха сесиите."); 
+        $connection = null;  
+        return $preparedSql->fetchAll();
+    }
+    catch(PDOException $error) {
+        echo ("Проблем със свързването с базата.Моля опитайте пак по-късно.");
+    }
+}
+
+function insertPresentation($username, $presentationLink, $timeDate){
     try {
 
         $connection = dbConnection();
-        $sql = "INSERT INTO presentations( topic, username, presentation, invitation, timeDate)
-        VALUES (:topic, :username, :presentation, :invitation, :timeDate);";
+        $sql = "UPDATE presentations
+        SET timeDate = :timeDate, presentationLink = :presentationLink
+        WHERE username = :username;";
 
         $preparedSql = $connection->prepare($sql) or die("Неуспешно свързване с базата.");
-        $preparedSql->bindParam(':topic', $topic);
         $preparedSql->bindParam(':username', $username);
-        $preparedSql->bindParam(':presentation', $presentation); 
-        $preparedSql->bindParam(':invitation', $invitation);
+        $preparedSql->bindParam(':presentationLink', $presentationLink); 
         $preparedSql->bindParam(':timeDate', $timeDate);
         $preparedSql->execute() or die("Вече сте записали тази тема."); 
         $connection = null;  
@@ -102,23 +115,6 @@ function getAllStudentsForSession(){
         echo ("Request processing failed.");
     }  
 }
-
-// function getFullName($username){
-//     try {
-
-//         $connection = dbConnection();
-//         $sql = "SELECT firstName,lastName FROM students WHERE username = :username; ";
-
-//         $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
-//         $preparedSql->bindParam(':username', $username);
-//         $preparedSql->execute() or die("Failed to execute sql query."); 
-//         $connection = null;  
-//         return $preparedSql->fetch();
-//    }
-//     catch(PDOException $error) {
-//         echo ("Request processing failed.");
-//     }  
-// }
 
 function addPresent($username, $topicId){
     try {

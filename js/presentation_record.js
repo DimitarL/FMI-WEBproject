@@ -1,78 +1,68 @@
 import { ajax, ajax_json } from './ajax.js';
 
-let callback = function(dates) {
-    for (let date of JSON.parse(dates)) {
-        addDateToSection(date['timeDate']);
-    }
-};
-
 const POST_METHOD = 'POST';
 const GET_METHOD = 'GET';
-const url = '../php/presentation_record.php';
 const errorId = 'error';
+const urlSessions = '../php/get_sessions.php';
+const dateSectionId = 'date';
+const sessionSectionId = 'session';
 
-let uploadFile;
-ajax_json(GET_METHOD, url, { success: callback });
-
-function addDateToSection(date) {
-    let selectElement = document.getElementById('date');
-    selectElement.add(new Option(date));
+let callback = function(sessions) {
+    for (let session of JSON.parse(sessions)) {
+        addToSectionByElementId(session['day'], sessionSectionId);
+    }
 }
+
+ajax_json(GET_METHOD, urlSessions, { success: callback });
+
+document.getElementById('session').addEventListener('click', () => {
+    const sessionDates = document.getElementById("date");
+    while (sessionDates.firstChild) {
+        sessionDates.removeChild(sessionDates.lastChild);
+    };
+    let session = document.getElementById('session').value;
+    getAllDatesForSeesion(session);
+})
 
 document.getElementById('submitButton').addEventListener('click', () => {
     addPresentation();
 })
 
+function getAllDatesForSeesion(session) {
+    let urlDates = '../php/get_dates.php';
+    let callback = function(dates) {
+        for (let date of JSON.parse(dates)) {
+            addToSectionByElementId(date['timeDate'], dateSectionId);
+        }
+    };
+    let input = parseInt(session);
+    ajax_json(POST_METHOD, urlDates, { success: callback }, JSON.stringify(input));
+}
+
+function addToSectionByElementId(option, id) {
+
+    let selectElement = document.getElementById(id);
+    selectElement.add(new Option(option));
+}
+
 function addPresentation() {
 
-    const topicId = 'topic';
+    const sessionId = 'session';
     const dateId = 'date';
-    const presentationId = 'presentation';
-    const invitationId = 'invitation';
+    const presentationLinkId = 'presentationLink';
 
-    if (!validateField(topicId) || !validateField(presentationId) || !validateField(dateId)) {
+    if (!validateField(presentationLinkId) || !validateField(dateId) || !validateField(sessionId)) {
         document.getElementById(errorId).innerText = "Моля попълнете всички полета.";
     } else {
         document.getElementById(errorId).innerText = "";
+        let presentationLink = document.getElementById(presentationLinkId).value;
+        let timeDate = document.getElementById(dateId).value;
+        let data = { presentationLink, timeDate };
 
-        let file = document.getElementById('invitation').files[0];
-        if (file === undefined) {
-            document.getElementById(errorId).innerText = "Моля прикачете покана.";
-            return false;
-        }
-
-        let formData = new FormData();
-        formData.append('topic', document.getElementById(topicId).value);
-        formData.append('file', file);
-
-        downloadImage(formData);
-        if (uploadFile) {
-            let topic = document.getElementById(topicId).value;
-            let presentation = document.getElementById(presentationId).value;
-            let invitation = uploadFile;
-            let timeDate = document.getElementById(dateId).value;
-
-            let data = { topic, presentation, invitation, timeDate };
-            insertPresentationData(data);
-        }
+        insertPresentationData(data);
     }
 
     return false;
-}
-
-function downloadImage(data) {
-    const urlScript = "../php/image_download.php";
-
-    let callback = function(msg) {
-        let regex = /\/uploads\//;
-        if (regex.test(msg)) {
-            uploadFile = msg;
-        } else {
-            document.getElementById(errorId).innerText = msg;
-        }
-    }
-
-    ajax(urlScript, { success: callback }, data);
 }
 
 function validateField(fieldId) {

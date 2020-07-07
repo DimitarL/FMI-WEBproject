@@ -5,8 +5,6 @@ import { printContent } from './sideNotes.js';
 document.getElementById('goToCalendar').addEventListener('click', goToCalendar);
 document.getElementById('goToLogIn').addEventListener("click", goToLogIn);
 
-// let topicId;
-
 function customTimer() {
     let timer = setInterval(function() {
         showPresentation();
@@ -31,10 +29,13 @@ window.addEventListener("load", function() {
 
 function showPresentation() {
     let callback = function(data) {
-        if (data == "") {
+        data = JSON.parse(data);
+        if ((data['topicId'] || data['topic'] || data['presentationLink']) === undefined) {
+
+            document.getElementById("topicId").innerText = "X";
+            document.getElementById("topicTitle").innerText = "X";
             document.getElementById('currentPresentation').innerHTML = "В момента няма презентиращи";
         } else {
-            data = JSON.parse(data);
             document.getElementById("topicId").innerText = data['topicId'];
             document.getElementById("topicTitle").innerText = data['topic'];
             document.getElementById('currentPresentation').innerHTML = '<a href="' + data['presentationLink'] + '"target="_blank">Линк</a>';
@@ -50,13 +51,14 @@ function addToPresentTable() {
         }
     }
     let topicId = parseInt(document.getElementById("topicId").innerText);
-    ajax_json("POST", "../php/present_manipulation.php", { success: callback }, JSON.stringify(topicId));
+    if (topicId) {
+        ajax_json("POST", "../php/present_manipulation.php", { success: callback }, JSON.stringify(topicId));
+    }
 }
 
 function updatePresentTable(link) {
     let callback = function(data) {
         if (data != "1") {
-            console.log("UPDATE PRESENT TABLE");
             alert(data);
         } else {
             window.location = link;

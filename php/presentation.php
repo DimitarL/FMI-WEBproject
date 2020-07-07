@@ -18,7 +18,6 @@ function getPresentation($date)
         WHERE :datePlaceholder between d.timeDate and d.timeEnd;";
         
         $stmt = $conn->prepare($sql);
-        // $date = "2020-07-05 17:16:00";
         $stmt->bindParam(":datePlaceholder", $date);
         $stmt->execute() or die("Failed to query from DB!");
         $conn = null;
