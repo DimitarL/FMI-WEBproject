@@ -118,16 +118,14 @@ html {
     color: #F6F4F3;
 }
 
-.edition,
-.minutes,
-.seconds {
+.edition, .minutes, .seconds {
     display: inline-block;
     width: 100px;
     border-radius: 8px;
     padding: 20px;
 }
 
-.againButton {
+.againButton, .stopButton, .continueButton {
     display: inline-block;
     width: 100px;
     height: 18px;
@@ -157,12 +155,33 @@ html {
     background: #e60576;
 }
 
+.stopButton {
+    background: #e60576;
+    margin-left: 40px;
+    margin-top: 10px
+}
+
+.continueButton {
+    background: #e60576;
+    margin-left: 4px;
+}
+
 .buttonStyle {
     background: #e60576;
     color: #F6F4F3;
     border: none;
-    font: size 13px;
+    font-size: 13px;
     font-weight: bold;
+}
+
+.buttonPauseStyle {
+    background: #e60576;
+    color: #F6F4F3;
+    border: none;
+    padding-top: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: -5px;
 }
 
 .numbers {
