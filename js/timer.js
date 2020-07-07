@@ -191,11 +191,11 @@ function startNewTimer() {
   <div class=\"againButton\"> \
   <button type=\"button\" onclick=\"refresh()\" class=\"buttonStyle\">Пусни отново</button> \
   </div> \
-  <div class=\"againButton\"> \
-  <button type=\"button\" onclick=\"stop();\">Спри</button> \
+  <div class=\"stopButton\"> \
+  <button type=\"button\" onclick=\"stop()\" class=\"buttonPauseStyle\">Спри</button> \
   </div> \
-  <div class=\"againButton\"> \
-  <button type=\"button\" onclick=\"continueWithIt();\">Продължи</button> \
+  <div class=\"continueButton\"> \
+  <button type=\"button\" onclick=\"continueWithIt()\" class=\"buttonPauseStyle\">Продължи</button> \
   </div>";
 }
 else {
