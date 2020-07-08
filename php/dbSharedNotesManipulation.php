@@ -5,30 +5,55 @@ if(!session_id()){
 
 include "db_connection.php";
 
+date_default_timezone_set('Europe/Sofia');
 $table_name = "sharedNotes";
 
 function insertInTable($inputNotes)
 {
     try {
         $connection = dbConnection();
-        $noteTime  = date('H:i');
         $authorUsername = $_SESSION["username"];
-        $sql = "INSERT INTO sharedNotes(inputNotes, noteTime, authorUsername) 
-            VALUES (:inputNotes, :noteTime, :authorUsername)";
+        $noteTime  = date('H:i');
+        $topicId = getCurrentTopicId();
 
+        $sql = "INSERT INTO sharedNotes(inputNotes, noteTime, authorUsername, topicId)
+            VALUES (:inputNotes, :noteTime, :authorUsername, :topicId)";
+ 
         $preparedSql = $connection->prepare($sql) or die("Свързването е неуспешно!" . "<br>");
         $preparedSql->bindParam(':inputNotes', $inputNotes);
         $preparedSql->bindParam(':noteTime', $noteTime);
         $preparedSql->bindParam(':authorUsername', $authorUsername);
-
-        if ($inputNotes != '') {
-            $preparedSql->execute() or die("Неуспешно изпълнение на SQL заявката!" . "<br>");
-        }
+        $preparedSql->bindParam(':topicId', $topicId);
+ 
+        $preparedSql->execute() or die("Неуспешно изпълнение на SQL заявката!" . "<br>");
         echo "Данните са добавени успешно!" . "<br>";
-
         $connection = null;
+        
     } catch (PDOException $error) {
-        echo $error->getMessage();
+        echo "Възникна грешка с добавянето на бележката. Моля, опитайте пак по-късно.";
+    }
+}
+ 
+function getCurrentTopicId(){
+    try {
+        $connection = dbConnection();
+        $currentTime = date('Y-m-d H:i');
+        $sql = "SELECT topicId
+            FROM presentations AS p
+            INNER JOIN dates AS d
+            ON p.timeDate = d.timeDate
+            WHERE :currentTime >= d.timeDate AND :currentTime <= d.timeEnd";
+        $result = $connection->prepare($sql) or die("Failed to prepare select sql query.");
+        $result->bindParam(':currentTime', $currentTime);
+        $result->execute() or die("Failed to execute select sql query.");
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        
+        $connection = null;
+
+        return $row['topicId'];
+    } catch (PDOException $error) {
+        echo "Неуспешен опит да се заредим номера на темата.";
+        return 10;
     }
 }
 
@@ -64,7 +89,13 @@ function downloadNotes()
     global $table_name;
     try {
         $connection = dbConnection();
-        $sql = "SELECT * FROM {$table_name}";
+        $sql = "SELECT firstName, lastName, facultyNumber, t.topicId, t.topic, inputNotes, noteTime
+        FROM sharednotes AS sn 
+        INNER JOIN topicsInfo AS t
+        ON sn.topicId = t.topicId
+        INNER JOIN students AS s 
+        ON s.username = sn.authorUsername
+        ORDER BY noteTime;";
         $counter = 1;
 
         $result = $connection->prepare($sql) or die("Failed to prepare select sql query.");
@@ -72,7 +103,7 @@ function downloadNotes()
         $fileOpen = fopen('../downloaded_Notes.txt', 'w');
 
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            fputs($fileOpen, $counter . ". " . $row['inputNotes'] . "\n");
+            fputs($fileOpen, "Автор: ". $row['facultyNumber'] . ", " . $row['firstName'] . " " . $row['lastName'] . "\nИме на темата: " . $row['topic'] . "; Номер на темата: " . $row['topicId'] . "\n" . $counter . ". Бележка: " . $row['inputNotes'] . "\n\n");
             $counter++;
         }
 
