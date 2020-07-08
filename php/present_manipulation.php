@@ -1,5 +1,4 @@
 <?php
-
 include "./db_manipulation.php";
 
 if(!session_id()){
@@ -29,5 +28,4 @@ if($_SESSION["username"]){
 } else {
     echo false;
 }
-
 ?>
