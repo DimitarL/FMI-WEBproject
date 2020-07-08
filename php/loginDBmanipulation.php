@@ -32,7 +32,7 @@ function checkData()
             header("location: calendar.php");
         } else {
             $_SESSION['errorMessage'] = 1;
-            die(header("location: loginStart.php"));
+            die(header("location: ../index.php"));
         }
     } else {
         $result2->execute() or die("Неуспешно изпълнение на заявката!");
@@ -44,11 +44,11 @@ function checkData()
                 header("location: calendar.php");
             } else {
                 $_SESSION['errorMessage'] = 1;
-                die(header("location: loginStart.php"));
+                die(header("location: ../index.php"));
             }
         } else {
             $_SESSION['errorMessage'] = 1;
-            die(header("location: loginStart.php"));
+            die(header("location: ../index.php"));
         }
     }
 }
