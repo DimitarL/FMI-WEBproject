@@ -22,11 +22,6 @@ window.addEventListener("load", function() {
 
 }, false);
 
-// window.onload = function() {
-//     customTimer();
-// addUsernameToPresentTable();
-// }
-
 function showPresentation() {
     let callback = function(data) {
         data = JSON.parse(data);
@@ -76,11 +71,3 @@ function goToLogIn() {
     let redirect = "../index.php";
     updatePresentTable(redirect);
 }
-
-// let waitForEl = function(selector, callback) {
-//     if (selector.innerHTML) {
-//         callback();
-//     } else {
-//         waitForEl(selector, callback);
-//     }
-// };
