@@ -17,7 +17,7 @@ function insertInTable($inputNotes) {
 
         $sql = "INSERT INTO sharedNotes(inputNotes, noteTime, authorUsername, topicId)
                 VALUES (:inputNotes, :noteTime, :authorUsername, :topicId)";
-
+ 
         $preparedSql = $connection->prepare($sql) or die("Свързването е неуспешно!" . "<br>");
         $preparedSql->bindParam(':inputNotes', $inputNotes);
         $preparedSql->bindParam(':noteTime', $noteTime);
@@ -96,6 +96,7 @@ function downloadNotes() {
 
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             fputs($fileOpen, "Автор: " . $row['facultyNumber'] . ", " . $row['firstName'] . " " . $row['lastName'] . "\nИме на темата: " . $row['topic'] . "; Номер на темата: " . $row['topicId'] . "\n" . $counter . ". Бележка: " . $row['inputNotes'] . "\n\n");
+
             $counter++;
         }
 
