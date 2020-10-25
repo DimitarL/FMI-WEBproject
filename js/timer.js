@@ -1,3 +1,7 @@
+let hasLectorRole;
+
+isLector();
+
 const year = new Date().getFullYear();
 const timeInFuture = new Date().getTime() + 7 * 60000;
 var flag = true;
@@ -23,23 +27,27 @@ let timer = setInterval(function () {
 
     document.getElementById("timer").innerHTML =
       "<div class=\"edition\"> \
-      <div class=\"numbers\">" + edition + "</div>Издание \
-    </div> \
-    <div class=\"minutes\"> \
-      <div class=\"numbers\">" + minutes + "</div>Минути \
-    </div> \
-    <div class=\"seconds\"> \
-      <div class=\"numbers\">" + seconds + "</div>Секунди \
-    </div> \
-    <div class=\"againButton\"> \
-    <button type=\"button\" onclick=\"refresh()\" class=\"buttonStyle\">Пусни отново</button> \
-    </div> \
-    <div class=\"stopButton\"> \
-    <button type=\"button\" onclick=\"stop()\" class=\"buttonPauseStyle\">Спри</button> \
-    </div> \
-    <div class=\"continueButton\"> \
-    <button type=\"button\" onclick=\"continueWithIt()\" class=\"buttonPauseStyle\">Продължи</button> \
-    </div>";
+        <div class=\"numbers\">" + edition + "</div>Издание \
+      </div> \
+      <div class=\"minutes\"> \
+        <div class=\"numbers\">" + minutes + "</div>Минути \
+      </div> \
+      <div class=\"seconds\"> \
+        <div class=\"numbers\">" + seconds + "</div>Секунди \
+      </div>";
+
+    if (hasLectorRole) {
+      document.getElementById("timer2").innerHTML =
+        "<div class=\"againButton\"> \
+          <button type=\"button\" onclick=\"refresh()\" class=\"buttonStyle\">Пусни отново</button> \
+        </div> \
+        <div class=\"stopButton\"> \
+          <button type=\"button\" onclick=\"stop()\" class=\"buttonPauseStyle\">Спри</button> \
+        </div> \
+        <div class=\"continueButton\"> \
+          <button type=\"button\" onclick=\"continueWithIt()\" class=\"buttonContinueStyle\">Продължи</button> \
+        </div>";
+    }
   }
   else {
     if (flag2 = false) {
@@ -98,9 +106,14 @@ function startRenewTimer() {
         </div> \
         <div class=\"seconds\"> \
           <div class=\"numbers\">" + seconds + "</div>Секунди \
-        </div> \
-        <div class=\"againButton\"> \
-        <button type=\"button\" onclick=\"refresh()\" class=\"buttonStyle\">Пусни отново</button></div>";
+        </div>";
+
+      if (hasLectorRole) {
+        document.getElementById("timer2").innerHTML =
+          "<div class=\"againButton\"> \
+            <button type=\"button\" onclick=\"refresh()\" class=\"buttonStyle\">Пусни отново</button> \
+          </div>";
+      }
     }
     else {
       if (flag2 = false) {
@@ -162,16 +175,20 @@ function startNewTimer() {
   </div> \
   <div class=\"seconds\"> \
     <div class=\"numbers\">" + seconds + "</div>Секунди \
-  </div> \
-  <div class=\"againButton\"> \
-  <button type=\"button\" onclick=\"refresh()\" class=\"buttonStyle\">Пусни отново</button> \
-  </div> \
-  <div class=\"stopButton\"> \
-  <button type=\"button\" onclick=\"stop()\" class=\"buttonPauseStyle\">Спри</button> \
-  </div> \
-  <div class=\"continueButton\"> \
-  <button type=\"button\" onclick=\"continueWithIt()\" class=\"buttonPauseStyle\">Продължи</button> \
   </div>";
+
+      if (hasLectorRole) {
+        document.getElementById("timer2").innerHTML =
+          "<div class=\"againButton\"> \
+      <button type=\"button\" onclick=\"refresh()\" class=\"buttonStyle\">Пусни отново</button> \
+    </div> \
+    <div class=\"stopButton\"> \
+      <button type=\"button\" onclick=\"stop()\" class=\"buttonPauseStyle\">Спри</button> \
+    </div> \
+    <div class=\"continueButton\"> \
+      <button type=\"button\" onclick=\"continueWithIt()\" class=\"buttonContinueStyle\">Продължи</button> \
+    </div>";
+      }
     }
     else {
       if (flag2 = false) {
@@ -190,4 +207,31 @@ function clearTimerr() {
       clearInterval(timer);
       alert("Времето за презентиране изтече!");
     }, 419999);
+}
+
+function isLector() {
+  let callback = function (msg) {
+    if (msg == "1") {
+      hasLectorRole = true;
+    } else {
+      hasLectorRole = false;
+    }
+  }
+  ajax_json("GET", "../php/is_lector.php", { success: callback });
+}
+
+function ajax_json(method, url, settings, json) {
+  let xhr = new XMLHttpRequest();
+
+  xhr.onload = function () {
+    if (xhr.status == 200) {
+      settings.success(xhr.responseText);
+    } else {
+      console.error(xhr.responseText);
+    }
+  };
+
+  xhr.open(method, url, false);
+  xhr.setRequestHeader("Content-type", "application/json")
+  xhr.send(json);
 }
