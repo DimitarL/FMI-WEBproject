@@ -6,11 +6,13 @@ date_default_timezone_set('Europe/Sofia');
 
 function getFreeDates($session){
     try {
+        $currentTime = date('Y-m-d H:i');
         $connection = dbConnection();
-        $sql = "SELECT * FROM dates WHERE hasPresentation = false AND day = :sessionDay";
+        $sql = "SELECT * FROM dates WHERE hasPresentation = false AND day = :sessionDay AND timeDate >= :currentTime";
 
         $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
         $preparedSql->bindParam(':sessionDay', $session);
+        $preparedSql->bindParam(':currentTime', $currentTime);
         $preparedSql->execute() or die("Неуспешно се заредиха свободните дати."); 
         $connection = null;  
         return $preparedSql->fetchAll();
@@ -23,9 +25,11 @@ function getFreeDates($session){
 
 function getAllSessions(){
     try {
+        $currentTime = date('Y-m-d H:i');
         $connection = dbConnection();
-        $sql = "SELECT DISTINCT day FROM dates WHERE hasPresentation = false";
+        $sql = "SELECT DISTINCT day FROM dates WHERE hasPresentation = false AND timeDate >= :currentTime";
         $preparedSql = $connection->prepare($sql) or die("Failed to prepare sql query.");
+        $preparedSql->bindParam(':currentTime', $currentTime);
         $preparedSql->execute() or die("Неуспешно се заредиха сесиите."); 
         $connection = null;  
         return $preparedSql->fetchAll();

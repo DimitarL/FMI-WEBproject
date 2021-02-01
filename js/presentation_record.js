@@ -50,9 +50,10 @@ function addPresentation() {
     const sessionId = 'session';
     const dateId = 'date';
     const presentationLinkId = 'presentationLink';
+    const linkRegex = /(https?:\/\/[^\s]+)/;
 
-    if (!validateField(presentationLinkId) || !validateField(dateId) || !validateField(sessionId)) {
-        document.getElementById(errorId).innerText = "Моля попълнете всички полета.";
+    if (!validateField(presentationLinkId) || !validateFieldToRegex(presentationLinkId, linkRegex) || !validateField(dateId) || !validateField(sessionId)) {
+        document.getElementById(errorId).innerText = "Моля попълнете всички полета коректно.";
     } else {
         document.getElementById(errorId).innerText = "";
         let presentationLink = document.getElementById(presentationLinkId).value;
@@ -68,6 +69,12 @@ function addPresentation() {
 function validateField(fieldId) {
     let elementValue = document.getElementById(fieldId);
     return elementValue.value.trim() != "";
+}
+
+
+function validateFieldToRegex(fieldId, regex) {
+    let elementValue = document.getElementById(fieldId);
+    return elementValue.value.match(regex);
 }
 
 function insertPresentationData(data) {
