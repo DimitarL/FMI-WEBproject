@@ -6,7 +6,6 @@ date_default_timezone_set('Europe/Sofia');
 
 function getFreeDates($session){
     try {
-        
         $currentTime = date('Y-m-d H:i');
         $connection = dbConnection();
         $sql = "SELECT * FROM dates WHERE hasPresentation = false AND day = :sessionDay AND timeDate >= :currentTime";

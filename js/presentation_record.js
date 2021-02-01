@@ -59,6 +59,7 @@ function addPresentation() {
         let presentationLink = document.getElementById(presentationLinkId).value;
         let timeDate = document.getElementById(dateId).value;
         let data = { presentationLink, timeDate };
+
         insertPresentationData(data);
     }
 
